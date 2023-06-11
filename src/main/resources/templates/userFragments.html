@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_userhead">
+<meta charset="utf-8">
+<title>DAT CSMIS</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+<!--<meta http-equiv="refresh" content="0; URL=http://localhost:8080/user/dashboard"> 
+ <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />-->
+<!-- Favicon -->
+<link th:href="@{/userRole/img/favicon.ico}" rel="icon">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+<link rel="preconnect" th:href="@{https://fonts.gstatic.com}"
+	crossorigin>
+<link
+	th:href="@{https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap}"
+	rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}"
+	rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css}"
+	rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link th:href="@{/userRole/lib/animate/animate.min.css}"
+	rel="stylesheet">
+<link th:href="@{/userRole/lib/owlcarousel/assets/owl.carousel.min.css}"
+	rel="stylesheet">
+<link
+	th:href="@{/userRole/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+	rel="stylesheet" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- MDB -->
+<link
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css}"
+	rel="stylesheet" />
+<!-- MDB -->
+
+
+<!-- Template Stylesheet -->
+<link th:href="@{/userRole/css/style.css}" rel="stylesheet">
+<style>
+
+  @media (width <= 990px) {
+    
+    .mysidecolorbar{
+      background-color: blueviolet;
+    }
+
+  }
+
+  @media (width <= 500px) {
+    
+    #dmenu{
+      top: 0;
+    }
+  }
+
+
+
+  #formFileMultiple3-error{
+    font-weight: 700;
+    display: block;
+    color: #f00;
+  }
+  
+  .error{
+    color: red;
+  }
+</style>
+</head>
+<body>
+<!-- sidebar -->
+ <div th:fragment="user_sidebar" class="container-fluid position-relative p-0 bg-primary">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary px-4 px-lg-5 py-0 py-lg-0">
+                <a href="/user/dashboard" class="navbar-brand p-0">
+                    <h1 class="text-white m-0"><img th:src="@{/userRole/img/images.png}" class="logo-img"></i>CSMIS</h1>
+                    <!-- <img th:src="@{/userRole/img/logo.png}" alt="Logo"> -->
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+
+                
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                 
+                    <div class="navbar-nav index-nav ms-auto  p-0 text-center mysidecolorbar">
+                        
+                        <a href="/user/dashboard" class="nav-item nav-link text-white">Home</a>
+                        <a href="/user/register" class="nav-item nav-link text-white" th:text="${session.register? 'Edit Register Info' : 'Register'}"></a>
+                        <a href="/user/historyRegister" class="nav-item nav-link text-white" th:if="${session.register}">Register History</a>
+    
+                        <a href="/user/feedbackPage" class="nav-item nav-link text-white">Feedback</a>
+                        <a href="/user/AboutUs" class="nav-item nav-link text-white">About
+                            Us</a>
+                        <div class="nav-item dropdown">
+                            <a href="aa.html" class="nav-link dropdown-toggle pb-2 text-white"
+                                data-bs-toggle="dropdown"><img
+                                th:src="@{/images/__${session.photo}__}" id="profile"
+                                th:text="${session.name}"> </a>
+                            <div class="dropdown-menu m-0 p-0" id="dmenu">
+                               
+                                <a class="dropdown-item m-0 p-3"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                    class="fas fa-user me-2 text-primary"></i>Profile Setup</a> 
+
+                                    
+                                    
+                                <a
+                                    class="dropdown-item m-0 p-3" id="userlogoutButton"><i
+                                    class="fas fa-sign-out-alt text-primary me-2"
+                                    ></i>Logout</a>
+    
+                                    
+                            </div>
+
+                            
+                        </div>
+    
+                    </div>
+    
+                   
+                </div>
+
+                
+            </nav>
+
+          
+        </div>
+
+        
+<!-- sdebar -->
+
+
+<!-- Profile bar-->
+
+<div th:fragment="profile_sidebar"
+    class="container-xxl position-relative p-0">
+    <div class="modal fade mt-5" id="exampleModal2" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Profile Setup</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="/user/profile"
+              enctype='multipart/form-data'
+              id="mySetup">
+              <div class="row">
+                <div class="col-5">
+                  <div class="mb-3">
+                    <img th:src="@{/images/__${session.photo}__}"
+                      class="img-thumbnail" style="width: 150px;" />
+                  </div>
+                  <label for="formFileMultiple" class="form-label">
+Profile Upload</label> <input class="form-control" type="file"
+                    id="formFileMultiple" name="propic" multiple />
+                </div>
+                <div class="col-7">
+                  <div th:text="${success}" style="color: green;"></div>
+                  <div th:text="${ErrorOnPsw}" style="color: red;"></div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple1" class="form-label">Employee
+ID</label> <input class="form-control" type="text"
+                      id="formFileMultiple1" name="sid"
+                      th:value="${session.staffid}" readonly />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple2" class="form-label">Name</label>
+                    <input class="form-control" type="text" id="formFileMultiple2"
+                      name="name" th:value="${session.name}" readonly />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple3" class="form-label">Old
+Password</label> <input class="form-control" type="password"
+                      id="formFileMultiple3" name="opsw" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple4" class="form-label">New
+Password</label> <input class="form-control" type="password"
+                      id="newPassword" name="npsw" />
+                    <div class="error-msg" style="color: red;"></div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Confirm
+New Password</label> <input class="form-control" name="cnpsw" type="password"
+                      id="confirmPassword" />
+                    <div class="error-msg" style="color: red;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-warning"
+                  data-dismiss="modal">Reset</button>
+                <button type="submit" id="mybtn" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Profile bar End -->
+
+
+<!-- Modal -->
+
+
+<!-- change password bar -->
+<!-- <div th:fragment="changepassword_sidebar" class="container-xxl position-relative p-0">
+    <div class="modal fade mt-5" id="changepassword" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Profile Setup</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/user/profile" enctype='multipart/form-data' onsubmit ="return validate()">
+        <div class="row">
+        
+         <div class="col-5">
+             <div class="mb-3"><img
+    th:src="@{/dashboard/img/user/__${session.photo}__}"
+    class="img-thumbnail"
+    style="width:150px;"
+    /></div>
+         <label for="formFileMultiple" class="form-label"> Profile Upload</label>
+    <input class="form-control" type="file" id="formFileMultiple" name="propic" multiple />
+        </div>
+        <div class="col-7">
+        <div th:text="${success}" style="color:green;"></div>
+        <div th:text="${ErrorOnPsw}" style="color:red;"></div>
+         <div class="mb-3">
+             <label for="formFileMultiple1" class="form-label">Employee ID</label>
+    <input class="form-control" type="text" id="formFileMultiple1" name="sid" th:value="${session.staffid}" readonly/>
+         </div>
+         <div class="mb-3">
+             <label for="formFileMultiple2" class="form-label">Name</label>
+    <input class="form-control" type="text" id="formFileMultiple2" name="name" th:value="${session.name}" />
+         </div>
+         <div class="mb-3">
+             <label for="formFileMultiple" class="form-label">Old Password</label>
+    <input class="form-control" type="password" id="formFileMultiple" name="opsw"/>
+
+         </div>
+         <div class="mb-3">
+             <label for="formFileMultiple" class="form-label">New Password</label>
+    <input class="form-control" type="text" id="password1" name="npsw" />
+    <div class="error-msg" style="color:red;"></div>
+         </div>
+          <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">Confirm New Password</label>
+    <input class="form-control" type="text" id="password2" />
+    <div class="error-msg" style="color:red;"></div>
+         </div>
+    
+    </div>
+        </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    <button type="submit" id="mybtn" class="btn btn-primary">Update</button>
+    </div>
+    </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div> -->
+
+  
+ <!-- change password end bar -->
+
+
+<div th:fragment="fo">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script th:src="@{/userRole/lib/wow/wow.min.js}"></script>
+  <script th:src="@{/userRole/lib/easing/easing.min.js}"></script>
+  <script th:src="@{/userRole/lib/waypoints/waypoints.min.js}"></script>
+  <script th:src="@{/userRole/lib/counterup/counterup.min.js}"></script>
+  <script th:src="@{/userRole/lib/owlcarousel/owl.carousel.min.js}"></script>
+  <script th:src="@{/userRole/lib/tempusdominus/js/moment.min.js}"></script>
+  <script
+    th:src="@{/userRole/lib/tempusdominus/js/moment-timezone.min.js}"></script>
+  <script
+    th:src="@{/userRole/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <!-- Template Javascript -->
+  <script th:src="@{/userRole/js/main.js}"></script>
+  <script th:inline="javascript">
+ 
+    
+ $("#mySetup").validate({
+rules : {
+name : {
+minlength : 2,
+maxlength : 100
+},
+opsw : {
+minlength : 2,
+maxlength : 8
+},
+npsw: {
+minlength : 5,
+maxlength : 8
+},
+cnpsw: {
+minlength : 5,
+maxlength : 8,
+equalTo: "#newPassword"
+}
+},
+messages : {
+opsw : {
+required : "Please enter your old password",
+minlength : "Password length at least 5 character",
+maxlength : "	Password length at most 8 character"
+},
+name : {
+required : "Please enter your name",
+minlength : " Name at least 2 character",
+maxlength : "Name at most 100 character"
+},
+submitHandler : function(form) {
+form.submit();
+}
+}
+});
+
+
+			$(document).ready(function() {
+				// Get the logout button element
+				var $logoutButton = $('#userlogoutButton');
+				// Add click event handler using jQuery
+				$logoutButton.on('click', function(event) {
+					console.log("hello");
+					event.preventDefault(); // Prevent the default behavior of the link
+					// Show SweetAlert dialog using SweetAlert2
+					Swal.fire({
+						text : "Are you sure?Do you want to logout?",
+						icon : "warning",
+						showCancelButton : true,
+						confirmButtonColor : "#3085D6",
+						cancelButtonColor : "#d33",
+						confirmButtonText : "logout"
+					}).then(function(result) {
+						if (result.isConfirmed) {
+							// Perform the logout action here
+							window.location.href = '/logout';
+						}
+					});
+				});
+				
+				
+				//profile alertbox
+			    var userProfileMessage = /*[[${userProfileMessage}]]*/ null;
+			    if (userProfileMessage == 'success') {
+			        console.log("success");
+			        Swal.fire({
+			            text:'Your profile setup update successfully!',
+			            icon: 'success',
+			            confirmButtonColor: '#3085D6',
+			            confirmButtonText: 'OK'
+			        });
+			    }
+			    else if (userProfileMessage == 'fail') {
+			        console.log("success");
+			        Swal.fire({
+			            text:'Your old password incorrect!',
+			            icon: 'error',
+			            confirmButtonColor: '#d33',
+			            confirmButtonText: 'OK'
+			        });
+			    }
+          
+			});
+
+      function validate() {
+        var password1 = document.getElementById("password1").value;
+        var password2 = document.getElementById('password2').value;
+        if (password1 != password2) {
+          $(".error-msg").html("Password do not match!").show();
+          return false;
+        } else {
+          $(".error-msg").html("").hide();
+          return true;
+        }
+      }
+  </script>
+</div>
+
+
+
+
+</body>
+</html>

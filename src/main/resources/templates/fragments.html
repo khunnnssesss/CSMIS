@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+<link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+	rel="stylesheet" />
+
+<link
+	href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/datatables.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
+	rel="stylesheet">
+
+<style>
+#headerbar {
+	z-index: 1;
+}
+
+.swal2-container.swal2-center>.swal2-popup {
+	width: 350px;
+}
+</style>
+
+</head>
+<body>
+	<!-- sidebar-start -->
+	<div th:fragment="html_sidebar"
+		class="col-12  col-lg-3 col-xl-2 vh-100 sidebar">
+		<div class="d-flex justify-content-between mt-3 brand-nav my-1">
+			<div class="m-auto">
+
+				<img th:src="@{/dashboard/img/logo.png}" class="img-logo">
+
+				<!--  <span class="font-weight-bold h4 text-primary mb-0">CSMIS</span> -->
+			</div>
+
+			<button class="btn btn-light d-block d-lg-none">
+				<i class="feather feather-x text-primary close-sidebarbtn"></i>
+			</button>
+		</div>
+		<div class="nav-menu mt-1 " id="sidebar">
+			<ul>
+				<li class="menu-item"><a href="/admin/dashboard"
+					class="menu-item-link active"> <span> <i
+							class="feather-home"></i> <span>Dashboard</span>
+					</span>
+				</a></li>
+
+
+				<li class="menu-title"><span>Admin Data Form</span></li>
+				<li class="menu-item"><a href="/admin/import"
+					class="menu-item-link"> <span> <i
+							class="fa-solid fa-list-check"></i> <span>Import File</span>
+					</span>
+
+				</a></li>
+				<li class="menu-item"><a href="/admin/res"
+					class="menu-item-link "> <span> <i
+							class="fa-solid fa-utensils fs-5"></i> <span> Restaurant
+								Data</span>
+					</span>
+
+				</a></li>
+
+				<li class="menu-item"><a href="/admin/HolidayAdd"
+					class="menu-item-link "> <span> <i
+							class="fa-solid fa-calendar-week"></i> <span> Holiday Data
+						</span>
+					</span>
+
+				</a></li>
+
+				<li class="menu-item"><a href="/admin/AvoidMeat"
+					class="menu-item-link "> <span> <i
+							class="fa-solid fa-bowl-food"></i> <span>Avoid Meat Data</span>
+					</span>
+
+				</a></li>
+
+
+				<li class="menu-item"
+					th:if="${ #authentication.principal.staffId != '000001'}"><a
+					th:href="@{/admin/register}" class="menu-item-link"> <span>
+							<i class="fa-solid fa-calendar-week"></i> <span>Lunch
+								Regsiter</span>
+					</span>
+
+				</a></li>
+
+				<li th:if='${session.register}' class="menu-item"><a
+					href="/admin/historyRegister" class="menu-item-link"> <span>
+							<i class="fa-solid fa-calendar-week"></i> <span>Register
+								History</span>
+					</span>
+
+				</a></li>
+				<li class="menu-title"><span>Order & Payment</span></li>
+				<li class="menu-item"><a href="/admin/order"
+					class="menu-item-link "> <span> <i
+							class="fa-solid fa-calendar-week"></i> <span>Weekly Order
+						</span>
+					</span>
+
+				</a></li>
+
+				<li class="menu-item"><a href="/admin/weeklyOrderList"
+					class="menu-item-link "> <span> <i
+							class="fa-solid fa-money-check-dollar"></i> <span>Order &
+								Payment</span>
+					</span>
+
+				</a></li>
+
+
+				<li class=""><a href="#homeSubmenu2" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle menu-item-link">
+						<span> <i class="feather-film"></i> <span>Data List</span>
+					</span>
+				</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu2">
+						<li>
+							<a href="/admin/EmployeeList"> Employee</a>
+						</li>
+						<li><a href="/admin/doorlogcard">Empoyee Access</a></li>
+						<li><a href="/admin/lunchAllList">Lunch All</a></li>
+						<li><a href="/admin/resList">Restaurant</a></li>
+						<li><a href="/admin/mail">Mail Noti</a></li>
+						<li><a href="/admin/feedbackList">Feedback</a></li>
+						<li><a href="/admin/HolidaysList">Holiday Data</a></li>
+						
+						<li><a href="/admin/doorlogList"> Doorlog</a></li>
+						<li><a href="/admin/costList">Cost</a></li>
+
+					</ul></li>
+
+
+
+			</ul>
+		</div>
+	</div>
+	<!-- sidebar end -->
+
+<!--profile setup Modal -->
+	<div th:fragment="userProfileFragment" class="modal fade mt-5"
+		id="profileSetupModal" tabindex="-1" role="dialog"
+		aria-labelledby="profileSetupModalLable" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">
+						<i class="feather-user text-primary"></i>Profile Setup
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="/admin/profile"
+						enctype='multipart/form-data' onsubmit="return validate()"
+						id="mySetup">
+						<div class="row">
+
+							<div class="col-5">
+								<div class="mb-3">
+									<img th:src="@{/images/__${session.photo}__}"
+										class="img-thumbnail" style="width: 150px;" />
+								</div>
+								<label for="formFileMultiple" class="form-label">
+									Profile Upload</label> <input class="form-control" type="file"
+									id="formFileMultiple" name="propic" multiple />
+							</div>
+							<div class="col-7">
+								
+								<div class="mb-3">
+									<label for="formFileMultiple" class="form-label">Employee
+										ID</label> <input class="form-control" type="text"
+										id="formFileMultiple" name="sid" th:value="${session.staffid}"
+										readonly />
+								</div>
+								<div class="mb-3">
+									<label for="formFileMultiple2" class="form-label">Name</label>
+									<input class="form-control" type="text" id="formFileMultiple2"
+										name="userName" th:value="${session.name}" readonly />
+								</div>
+								<div class="mb-3">
+									<label for="formFileMultiple1" class="form-label">Old
+										Password</label> <input class="form-control" type="password"
+										id="formFileMultiple1" name="opsw" required />
+								</div>
+								<div class="mb-3">
+									<label for="formFileMultiple" class="form-label">New
+										Password</label> <input class="form-control" type="password"
+										id="password1" name="npsw" />
+									<div class="error-msg" style="color: red;"></div>
+								</div>
+								<div class="mb-3">
+									<label for="formFileMultiple" class="form-label">Confirm
+										New Password</label> <input class="form-control" type="password"
+										id="password2" name="cnpsw"/>
+									<div class="error-msg" style="color: red;"></div>
+								</div>
+
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="reset" class="btn btn-secondary"
+								data-dismiss="modal">Reset</button>
+							<button type="submit" id="mybtn" class="btn btn-primary">Update</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--profile setup modal -->
+
+	<!-- header start -->
+	<div th:fragment="html_header" class="row header mb-4" id="headerbar">
+		
+		<div class="col-12 ">
+
+			<div
+				class="p-2 bg-primary rounded mt-2 d-flex justify-content-between align-items-center">
+				<button class="sidebar-show btn btn-primary d-block d-lg-none p-1">
+					<i class="feather feather-menu " style="font-size: 25px;"></i>
+				</button>
+				<!-- <form class=" d-none d-md-block">
+					<div class="form-inline">
+						<input type="text" class="form-control mr-2 bg-light">
+						<button class="btn btn-light">
+							<i class="feather-search"></i>
+						</button>
+					</div>
+				</form> -->
+
+				<div class="dropdown ">
+					<button class="btn btn-light dropdown-toggle shadow-lg"
+						type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						 <span>Announced</span>
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<div th:each="ann : ${session.annList}">
+						<div class="card text-black" style="height: 43px;width: 422px;">
+			
+						 <img th:src="@{/images/__${ann.image}__}" class="card-img mb-2" alt="..." style="height: 43px;width: 422px;">
+						  <div class="card-img-overlay" >
+						  <div class="d-flex justify-content-between" style="margin-top: -15px">
+						    <h3 class="card-title" ><i th:text="${ann.subject}"></i></h3>
+						    <div>
+						    <p class="mb-0" th:text="${'Expire in '+ ann.dateTime}" style="font-size: 12px;"></p>
+						    <p th:text="${'Announcement from '+ ann.dateNow}" style="font-size: 12px;"></p>
+						    </div>
+						    </div>
+						   
+						  </div>
+					</div>
+					</div>
+					</div>
+				</div>
+				
+
+				
+				<div class="dropdown ">
+					<button class="btn btn-light dropdown-toggle shadow-lg"
+						type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<img th:src="@{/images/__${session.photo}__}" alt=""
+							class="user-img"> <span th:text="${session.name}"></span>
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item p-3"
+							href="/admin/profile?id=${session.id}" data-toggle="modal"
+							data-target="#profileSetupModal"><i
+							class="feather-user mr-2 text-primary"></i>Setup Profile</a>
+							 <a
+							class="dropdown-item p-3" id="logoutButton"><i
+							class="feather-log-out mr-2 text-primary"></i>Logout</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+
+	</div>
+	<!-- header-end -->
+
+
+	<div th:fragment="html_script">
+		<script th:src="@{/dashboard/vendor/jquery-3.3.1.min.js}"></script>
+		<script
+			th:src="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/dashboard/js/popper.min.js}"></script>
+		<script th:src="@{/dashboard/js/jquery.waypoints.min.js}"></script>
+
+
+		<script th:src="@{/dashboard/js/app.js}"></script>
+
+		<!-- <script th:src="@{/dashboard/vendor/data_table/jquery.dataTables.min.js}"></script>
+<script th:src="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.js}"></script>
+ -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+		<script
+			th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js}"></script>
+		<script
+			th:src="@{https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js}"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+		<script
+			src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"
+			integrity="sha512-+/4Q+xH9jXbMNJzNt2eMrYv/Zs2rzr4Bu2thfvzlshZBvH1g+VGP55W8b6xfku0c0KknE7qlbBPhDPrHFbgK4g=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script th:src="@{/dashboard/js/dashboard.js}"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+		<script
+			src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/datatables.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script th:inline="javascript">
+			$(document).ready(function() {
+				// Get the logout button element
+				var $logoutButton = $('#logoutButton');
+
+				// Add click event handler using jQuery
+				$logoutButton.on('click', function(event) {
+					console.log("in logout event!!");
+					event.preventDefault(); // Prevent the default behavior of the link
+
+					// Show SweetAlert dialog using SweetAlert2
+					Swal.fire({
+
+						text : "Are you sure?Do you want to logout?",
+						icon : "warning",
+						showCancelButton : true,
+						confirmButtonColor : "#3085d6",
+						cancelButtonColor : "#d33",
+						confirmButtonText : "logout"
+					}).then(function(result) {
+						if (result.isConfirmed) {
+							// Perform the logout action here
+							window.location.href = '/logout';
+						}
+					});
+				});
+
+				//profile alertbox
+				var profileMessage = /*[[${profileMessage}]]*/null;
+				if (profileMessage == 'success') {
+					console.log("success");
+					Swal.fire({
+						text : 'Your profile setup update successfully!',
+						icon : 'success',
+						confirmButtonColor : '#3085d6',
+						confirmButtonText : 'OK'
+					});
+				} else if (profileMessage == 'fail') {
+					console.log("success");
+					Swal.fire({
+						text : 'Your old password incorrect!',
+						icon : 'error',
+						confirmButtonColor : '#d33',
+						confirmButtonText : 'OK'
+					});
+				}
+
+			});
+
+			function validate() {
+			var password1 = document.getElementById("password1").value;
+			var password2 = document.getElementById('password2').value;
+			if (password1 != password2) {
+				$(".error-msg").html("Password do not match!").show();
+				return false;
+			} else {
+				$(".error-msg").html("").hide();
+				return true;
+			}
+		}
+
+		$("#mySetup").validate({
+			rules : {
+				userName : {
+					minlength : 2,
+					maxlength : 100
+				},
+				opsw : {
+					minlength : 2,
+					maxlength : 8
+				},
+				
+npsw: {
+minlength : 5,
+maxlength : 8
+},
+cnpsw: {
+minlength : 5,
+maxlength : 8,
+equalTo: "#password1"
+}
+
+			},
+
+			messages : {
+
+				opsw : {
+					required : "Please enter your old password",
+					minlength : "Password length at least 5 character",
+					maxlength : "	Password length at most 8 character"
+				},
+				userName : {
+					required : "Please enter your  name",
+					minlength : " Name at least 2 character",
+					maxlength : "Name at most 100 character"
+				},
+
+				submitHandler : function(form) {
+					form.submit();
+				}
+
+			}
+		});
+		</script>
+
+	</div>
+
+
+
+
+
+</body>
+</html>

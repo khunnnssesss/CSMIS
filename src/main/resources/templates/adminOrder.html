@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Admin Dashboard</title>
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/jquery.dataTables.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+<style>
+.swal2-container .swal2-popup{
+width:25em !important;
+}
+.card-01{
+  box-shadow:2px 2px 20px rgba(0,0,0,0.3); border:none; margin-bottom:30px;
+}
+.card-01:hover{
+  transform: scale(1.05);
+  transition: all 1s ease;
+  z-index: 999;
+}
+.card-01 .card-body{
+  position:relative; padding-top:40px;
+}
+.card-01 .badge-box{
+  position:absolute; 
+  top:-20px; left:50%; width:100px; height:100px;margin-left:-50px; text-align:center;
+}
+.card-01 .badge-box i{
+  background:#006EFF; color:#fff; border-radius:50%;  width:50px; height:50px; line-height:50px; text-align:center; font-size:20px;
+}
+.card-01 .height-fix{
+  height:455px; overflow:hidden;
+}
+
+.card-01 .height-fix .card-img-top{width:auto!important;}
+.orderDay-fixed{
+position: fixed;
+  top: 150px;
+  right: 100px;
+}
+
+
+
+</style>
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+	<section class="container-fluid">
+		<div class="row">
+			<!-- sidebar start -->
+			<div th:replace="~{fragments :: html_sidebar}"></div>
+			<!-- sidebar end -->
+			<div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+			<!-- header start -->
+		   <div th:replace="~{fragments :: html_header}"></div>
+				<!-- header end -->
+				<!-- content start -->
+				<div class="row  ">
+
+					
+					<div class="col-12">
+						<div class="card mb-4 card-height">
+							<div class="card-body ">
+								<div class="d-flex justify-content-between align-items-center">
+									<h4 class="mb-0">
+										<i class="feather-codepen text-primary"></i> Weekly Lunch Order
+									</h4>
+									<button class="btn btn-outline-primary btn-sm full-page-btn">
+										<i class="feather-maximize-2 h4"></i>
+									</button>
+								</div>
+								<hr>
+								
+								
+								
+								
+								<!-- <div class="row" id='hideCard' th:if="${yesOrder == 'true'}"> -->
+								<!-- order card -->
+								<div class="row" id='hideCard'>
+								<div class="col-md-4 m-auto">
+          
+          <div class="card card-01 order1-margin">
+          <img class="card-img-top" src="https://as2.ftcdn.net/v2/jpg/01/09/56/95/1000_F_109569574_p2t7Ncz5VapNFrpny2e9xMrpa2oBimsO.jpg" alt="Card image cap">
+          <div class="card-body">
+            <span class="badge-box"><i class="fa fa-check"></i></span>
+           <!-- <input type="hidden" th:value="${orderListId}"/> -->
+            <p class="card-text h6">This week register order is ordered!<br>You can order next week Friday  for lunch eat order at 2:01PM </p>
+            <!-- <a th:href="@{/weeklyOrderDetail/{id}(id=${orderListId},vId=${'CS00'+orderListId})}"  class="btn btn-primary w-100 my-2 text-white">Order Detail</a> -->
+          </div>
+        </div>
+        </div>
+        
+								</div>
+								
+					<!-- order card -->			
+					<!-- sunday sat no card -->
+								<div class="row " id='saturCard'>
+								<div class="col-md-4 m-auto">
+          
+          <div class="card card-01 my-5">
+          <img class="card-img-top" src="https://as2.ftcdn.net/v2/jpg/01/09/56/95/1000_F_109569574_p2t7Ncz5VapNFrpny2e9xMrpa2oBimsO.jpg " alt="Card image cap" >
+          <div class="card-body">
+            <span class="badge-box"><i class="fa fa-check"></i></span>
+           <!-- <input type="hidden" th:value="${orderListId}"/> -->
+            <p class="card-text h5 text-center my-3">Saturday and Sunday order is close. </p>
+           <!--  <a th:href="@{/weeklyOrderDetail/{id}(id=${orderListId},vId=${'CS00'+orderListId})}"  class="btn btn-primary w-100 my-2 text-white">Order Detail</a> -->
+          </div>
+        </div>
+        </div>
+       
+        
+								</div>
+								
+					<!-- sunday sat no card -->		
+								
+								
+								
+								
+								
+								
+								<!-- <div th:if="${yesOrder != 'true'}"> -->
+							
+								<div class="orderClose col-6" style="margin-left:100px;">
+								<div th:if="${!isFridayBetween2PMAnd12AM}" class="alert alert-danger d-flex align-items-center "  role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div>
+    You can order in Friday at 2:05PM.
+  </div>
+								</div>
+								</div>
+								<div id='ordertable'>
+								<div class="row mb-3 " >
+
+									<h4 class="ml-5 mb-0">
+										 <span><i class="fa-solid fa-utensils text-primary mr-2"></i></span><span
+											th:text="${restData.name}"></span> 
+									</h4>
+
+
+								</div>
+								<div class="row" >
+
+
+									 <form id="submitOrderForm" action="/submitOrder" method="post" class="w-75 m-auto">
+									 <input
+													type="hidden" th:value="${restData.id}"
+													name="resId" />
+										<table class="table table-striped order-table ">
+											<tr>
+												<th>#</th>
+												<th>Date</th>
+												<th class="text-center">Total Register</th>
+												<th>Price</th>
+												<th>Total Price</th>
+												<th>Avoid Meat</th>
+											</tr>
+
+
+
+											<tr th:each="row,iter : ${datecount}" class="table-tr">
+												<td id="countpl"></td>
+												<td id="mycal">
+													<div th:text="${row.date}"></div> <input type="hidden"
+													th:value="${row.date}"
+													th:name="'orderList['+ ${iter.index} +'].date'" />
+												</td>
+												<td><input type="hidden" id="countc"
+													th:value="${row.noOfPeople}" />
+													<div class="d-flex justify-content-center">
+														<button type="button"
+															class="btn btn-primary btn-sm calsub click-minus-button" th:disabled="${!isFridayBetween2PMAnd12AM}">
+															<i class="fas fa-minus"></i>
+														</button>
+														<input type="number"
+															class="form-control form-control-sm w-25"
+															id="click-count" th:value="${row.noOfPeople}"
+															th:min="${row.noOfPeople}"
+															th:name="'orderList['+ ${iter.index} +'].totalPeople'" />
+
+														<button type="button"
+															class="btn btn-primary btn-sm caladd click-plus-button " th:disabled="${!isFridayBetween2PMAnd12AM}">
+															<i class="fas fa-plus"></i>
+														</button>
+													</div></td>
+												<td>
+													<div class="price" th:text="${restData.totalPrice}"></div>
+													<input type="hidden" th:value="${restData.totalPrice}"
+													th:name="'orderList['+ ${iter.index} +'].price'" />
+												</td>
+												<td>
+													<div class="totalPri"
+														th:text="${row.noOfPeople * restData.totalPrice}"></div> <input
+													type="hidden"
+													th:value="${row.noOfPeople  * restData.totalPrice}"
+													th:name="'orderList['+ ${iter.index} +'].totalPrice'" />
+												</td>
+												<td>
+													 <p th:each="avoid,avoidIter: ${row.avoidList}" class="m-0 ">
+														<i class="fa-solid fa-xmark text-danger  mr-2"> </i><span
+															th:text="${avoid.name}"></span>-<span
+															th:text="${avoid.count}"></span> <input type="hidden"
+															th:value="${avoid.name}"
+															th:name="'orderList['+ ${iter.index} +'].avoidMeatList[' + ${avoidIter.index} + '].name'" />
+														<input type="hidden" th:value="${avoid.count}"
+															th:name="'orderList['+ ${iter.index} +'].avoidMeatList[' + ${avoidIter.index} + '].count'" />
+													</p> 
+
+
+ 
+												</td>
+											</tr>
+
+
+
+										</table>
+										<div class=" text-right w-75 m-auto">
+											<input  type="submit"
+												class="btn btn-primary col-3  " id="weeklyOrderBtn" th:disabled="${!isFridayBetween2PMAnd12AM}" value="Order"  />
+										</div> 
+
+
+									 </form> 
+
+
+								</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			<!-- content end -->
+
+
+		</div>
+		</div>
+	</section>
+
+	<!-- <div th:replace="~{fragments :: html_script}" /></div> -->
+
+	<script th:src="@{/dashboard/vendor/jquery-3.3.1.min.js}"></script>
+  <script
+    th:src="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/dashboard/js/popper.min.js}"></script>
+  <script th:src="@{/dashboard/js/jquery.waypoints.min.js}"></script>
+  <script
+    th:src="@{/dashboard/vendor/data_table/jquery.dataTables.min.js}"></script>
+  <script
+    th:src="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.js}"></script>
+  <script th:src="@{/dashboard/js/app.js}"></script>
+  <script th:src="@{/dashboard/js/dashboard.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" ></script>
+  
+	
+	<script th:inline="javascript">
+var orderEndDate = '[[${orderEndDate}]]'
+
+var curdate = moment().format('y-MMMM-DD')
+//var curdate=' 2023-May-22 ';
+var curorder = moment(orderEndDate).format('y-MMMM-DD')
+var curday = moment().format('dddd')
+//var curday='Saturday';
+var yesnoorder = '[[${yesOrder}]]'
+//var yesnoorder='false';
+/* console.log('yes order ','cur weeeks ',getCurrentWeek(),' cur day : ',(curday != 'Saturday' && curday !='Sunday')) */
+console.log('tesitnkd lgjdklgjdk '+curday)
+console.log("hello")
+console.log("hello world")
+
+$(document).ready(function () {
+	var $logoutButton = $('#logoutButton');
+
+				// Add click event handler using jQuery
+				$logoutButton.on('click', function(event) {
+					console.log("in logout event!!");
+					event.preventDefault(); // Prevent the default behavior of the link
+
+					// Show SweetAlert dialog using SweetAlert2
+					Swal.fire({
+
+						text : "Are you sure?Do you want to logout?",
+						icon : "warning",
+						showCancelButton : true,
+						confirmButtonColor : "#3085d6",
+						cancelButtonColor : "#d33",
+						confirmButtonText : "logout"
+					}).then(function(result) {
+						if (result.isConfirmed) {
+							// Perform the logout action here
+							window.location.href = '/logout';
+						}
+					});
+				});
+
+  })
+
+if(yesnoorder == 'true'){
+	
+		
+	$('.orderClose').css('display','none');
+		$('#hideCard').css('display', 'block');
+		
+		$('#ordertable').css('display', 'none');
+		$('#saturCard').css('display', 'none');
+		
+}
+else{
+	console.log("outside if");
+ if(curday == 'Saturday' || curday =='Sunday'){
+	console.log("doyou if");
+	$('.orderClose').css('display','none');
+	$('#saturCard').css('display', 'block');
+	 $('#hideCard').css('display', 'none');
+	 $('#ordertable').css('display', 'none');
+	
+}
+ else{
+	 console.log("hnin theint")
+	 $('#saturCard').css('display', 'none');
+	 $('#hideCard').css('display', 'none');
+	 $('#ordertable').css('display', 'block');
+	
+	 
+ }
+}
+
+
+
+function getCurrentWeek(){
+	var weekstart = moment().clone().startOf('Week')
+	var curdays = []
+	
+	for( var i =0; i<=6;i++){
+		curdays.push(moment((weekstart)).day(i).format('y-MM-DD'));
+	}
+	
+	return curdays;
+}
+
+
+   
+ /* var count1= parseInt( $('#countc').val())
+  console.log(typeof(count1));
+  var price1=parseInt($('.price').html())
+  $('.totalPri').html(count1*price1)*/
+  
+    
+    $('.click-plus-button').click(function() {
+        var input = $(this).prev('input[type="number"]');
+        var quantity = parseInt(input.val());
+        var price = $(this).closest('.table-tr').find('.price').text();
+        var totalp =$(this).closest('.table-tr').find('.totalPri').html()
+       
+       
+      
+     ++quantity;
+       
+       var newValue= input.val();
+       /*  newValue *= Number(price) */
+       var totalprice = Number(price)*quantity
+       console.log(" newval "+newValue+" price"+ price + " totalprice "+totalp+" quantity "+quantity)
+       // console.log("total price is "+totalprice)
+        $(this).closest('.table-tr').find('.totalPri').html(totalprice);
+     //  $(this).closest('.table-tr').find('.totalPri').next('input[type="hidden"]').val('')
+      var hidden=$(this).closest('.table-tr').find('.totalPri').next('input[type="hidden"]');
+     console.log(price,quantity)
+     hidden.val(Number(price)*quantity)
+     
+       input.val(quantity)
+        
+      });
+
+      $('.click-minus-button').click(function() {
+    	  console.log('testin')
+    	  var input = $(this).prev('input[type="number"]');
+    	 
+    	  
+    	  
+    	  var getmin = $(this).next('input[type="number"]');
+    	
+    	 var minnum = Number(getmin.attr('min'))
+     var quantity = parseInt(getmin.val());
+    	 
+    	
+          var price = $(this).closest('.table-tr').find('.price').text();
+          var totalp =$(this).closest('.table-tr').find('.totalPri').html()
+                
+         
+        if (quantity > minnum) {
+       --quantity;
+        	var newValue= getmin.val();
+        
+        console.log("new value "+newValue+" totalp"+totalp+ " quan "+quantity)
+        
+        
+          
+          var totalprice = Number(totalp)-Number(price)
+          console.log("total price:"+totalprice);
+        var price = $(this).closest('.table-tr').find('.price').text();
+        $(this).closest('.table-tr').find('.totalPri').html(totalprice);
+        
+        getmin.val(quantity);
+        var hidd=$(this).closest('.table-tr').find('.totalPri').next('input[type="hidden"]');
+        hidd.val(Number(totalp)-Number(price))
+       
+        }
+       
+      });
+      
+ 	$('#weeklyOrderBtn').click(function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Next week register for order!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, order it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('#submitOrderForm').submit(); // Submit the form to the specified action URL
+        }
+    });
+});
+ 
+ 
+function validate() {
+			var password1 = document.getElementById("password1").value;
+			var password2 = document.getElementById('password2').value;
+			if (password1 != password2) {
+				$(".error-msg").html("Password do not match!").show();
+				return false;
+			} else {
+				$(".error-msg").html("").hide();
+				return true;
+			}
+		}
+
+		$("#mySetup").validate({
+			rules : {
+				userName : {
+					minlength : 2,
+					maxlength : 100
+				},
+				opsw : {
+					minlength : 2,
+					maxlength : 8
+				},
+
+			},
+
+			messages : {
+
+				opsw : {
+					required : "Please enter your old password",
+					minlength : "Password length at least 2 character",
+					maxlength : "	Password length at most 8 character"
+				},
+				userName : {
+					required : "Please enter your  name",
+					minlength : " Name at least 2 character",
+					maxlength : "Name at most 100 character"
+				},
+
+				submitHandler : function(form) {
+					form.submit();
+				}
+
+			}
+		});
+
+
+
+
+
+
+
+ 
+</script>
+
+
+</body>
+</html>

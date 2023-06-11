@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{userFragments :: html_userhead}" />
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+  
+  <!-- Custom Styles -->
+    <link rel="stylesheet" href="style2.css">
+  
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+    <!-- Icon Font Stylesheet -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/userRole/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/userRole/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{/userRole/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link
+    th:href="@{https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css}"
+    rel="stylesheet"
+  />
+  <!-- MDB -->
+  
+    <link th:href="@{https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <style>
+        .slow  .switch-group { transition: left 0.7s; -webkit-transition: left 0.7s; }
+        .fast  .switch-group { transition: left 0.1s; -webkit-transition: left 0.1s; }
+        .quick .switch-group { transition: none;      -webkit-transition: none; }
+        .box{
+        background: red;
+       
+        }
+        
+        .swal2-container.swal2-center>.swal2-popup{
+    width:360px;
+   margin:auto;
+   margin-top:10%;}
+   
+        
+        #calendar{
+        color: red;
+        width: 600px;
+        }
+      </style>
+</head>
+<head th:replace="~{userFragments :: html_userhead}"/>
+<body>
+    <div class="container-fluid bg-white p-0">
+    
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+     	<!-- Navbar & Hero Start -->
+       <div class="container-fluid p-0 navFixed ">
+        <div th:replace="~{userFragments :: user_sidebar}"></div>
+      </div>
+		
+		<!-- Button trigger modal -->
+
+		<!-- Modal 2-->
+    	<!-- <div th:replace="~{userFragments ::  changepassword_sidebar}"></div> -->
+		<div th:replace="~{userFragments :: profile_sidebar}"></div>
+		
+			<!-- Modal 2 End -->
+ 
+
+
+<!-- Logo and Display Card Box Section -->
+
+<!--<div class="w3-container w3-center" style="background-color: white;">
+  <img src="/userRole/img/images.png" alt="Your Logo" width="200" height="150" style="border-radius: 20%;">-->
+
+  <div class="col-12 ">
+    <div class="w-30 mx-auto">
+      <marquee width="100%" direction="left" height="100px"
+        class="text-white float-end">
+        <p class="text-black-50 fs-4 fw-semibold fst-italic">
+          
+          <span class="fs-4" style="font-size: 4px;font-family: 'Times New Roman', serif; color: #607d8b;"><i class="fa fa-utensils text-primary me-2"></i><b> Welcome to CSMIS Lunch Box </b><i class="fa fa-utensils text-primary me-2"></i></span>
+          
+          
+        </p>
+      </marquee>
+    </div>
+  </div>
+
+
+  
+  
+  
+
+  <!--<div class="w3-card w3-padding w3-margin-top" style="max-width: 400px; margin: 0 auto;">
+    
+    <h2>CSMIS Lunch Box</h2>
+    <p>We serve for your Ultimate Lunch Box</p>
+  </div>
+</div>-->
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+  
+  <!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-large">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="/userRole/img/rest.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="500" height="400">
+     <br><br><br><img src="/userRole/img/datp.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="500" height="600">
+    </div>
+
+<div class="w3-col m6 w3-padding-large">
+      <b><h1 class="w3-center">About Our Cathering Service</h1><br></b>
+      <h5 class="w3-center w3-text-blue-gray ">Started from 2020</h5>
+      <p class="w3-large" style="font-size: 2.2rem;"><b>CSMIS LUNCH BOX was founded by DirAceTechnology for best experience of employees'lunch. LUNCHBOX is a food organization that offers different categories of food to fit the better lunch of every employee. We know it is hard for others to make up their minds on what they want so why not offer a little of everything. And each employee can choose what they want to eat, what meat they want to avoid and complain about the taste of their lunch to the resturant that we offer. They can also reply feedbacks to our admins and also comment in our website page. We offer excellent service with the best experience of our company. And our company' heads are always thinking about their employees to give opportunity for every employee & better allowances. Our Menu is especially in Burmese Cuisine and sometime for Chinese Cuisine.We only use <span class="w3-tag w3-brown">hygienic</span> ingredients.</p>That is overall details about of our service.
+      <p class="w3-large"></b>
+      
+      <br><br><b><p class="w3-large w3-text-blue-gray w3-hide-medium">CSMIS LUNCH BOX は、従業員の昼食を最高の体験にするために DirAceTechnology によって設立されました。 LUNCH BOX は、すべての従業員のより良いランチに合うように、さまざまなカテゴリーの食品を提供する食品組織です。 他の人が自分の欲しいものを決めるのは難しいことを私たちは知っているので、すべてを少しずつ提供してみてはいかがでしょうか。 そして各従業員は、何を食べたいか、どの肉を避けたいかを選択し、提供するレストランにランチの味について文句を言うことができます。 また、管理者にフィードバックに返信したり、Web サイトのページにコメントしたりすることもできます。 当社の最高の経験を活かした優れたサービスを提供します。 そして、当社のトップは常に従業員のことを考え、すべての従業員に機会とより良い手当を与えるよう努めています。 私たちのメニューは特にビルマ料理、時には中華料理です。衛生的な食材のみを使用しています。これが私たちのサービスの全体的な詳細です。</p></b>
+    </div>
+  </div>
+  </div>
+  <hr>
+  
+  <!-- Menu Section -->
+  
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center"><b>
+        <i style='font-size:24px' class='fas'>&#xf559;</i>Details Fact<i style='font-size:24px' class='fas'>&#xf559;</i>
+      </b></h1><br><br><br>
+      
+      <h3><b>For  Lunch  Menu</b></h3>
+      <p class="w3-text-blue-gray"><b>Our lunch-menu will be changed once after week by Admin</b></p><br><br>
+    
+      <h3><b>Register Date</b></h3>
+      <p class="w3-text-blue-gray"><b>You can also register for next month as selected date you want to eat </b></p><br><br>
+
+      <h3><b>Choose Avoid Meat</b></h3>
+      <p class="w3-text-blue-gray"><b>Consumers can avoid meat they don't like such as pork,beef,goat & fish</b></p><br><br>
+    
+      <h3><b>Send feedbacks</b></h3>
+      <p class="w3-text-blue-gray"><b>You can complain about taste and look & send feedback mail to admin</b></p><br><br>
+    
+      <h3><b>Create Comments</b></h3>
+      <p class="w3-text-blue-gray"><b>For each employee, they can write in comment box dealing with their lunch in our web page</b></p><br><br>
+      
+    
+      <h3><b>Resturant Choice</b></h3>
+      <p class="w3-text-blue-gray"><b>An admin will select the best appropriate resturant for you</b></p><br><br>   
+      
+      <h3><b>Announcement Send</b></h3>
+      <p class="w3-text-blue-gray"><b>An announcement will be sent to your mail if any change in your catering dates</b></p><br><br>
+      
+      
+      <h3><b>Fixed Catering Date</b></h3>
+      <p class="w3-text-blue-gray"><b>As final fact, you can update about your registered dates for next week before Friday : 2:00PM of your current week</b></p><br>
+    </div>
+    
+    <div class="w3-col l6 w3-padding-large">
+      <img src="/userRole/img/comphan.JPG" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:90%">
+      <br><br><img src="/userRole/img/Menu.png" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+      <br><br><img src="/userRole/img/R.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:90%">
+    </div>
+  </div>
+
+  <hr>
+
+
+<!-- Contact Section -->
+  <div class="w3-container w3-padding-64" id="contact">
+    <h1><b>Contact Us</b></h1><br>
+   
+    <p class="par" ><b>We offer full-service catering for our company' employee for their better lunch. We understand their needs and we will cater the food to satisfy the biggest criteria of them all, both look and taste. Do not hesitate to contact us for your feedback and every reason you need to know.</b></p>
+    
+    <p class="w3-text-yellow w3-large"><b>CSMIS Catering Service By DirAceTechnology. No.17 Building, MICT Park.</b></p>
+    <hr> 
+        
+    <p class="par"><b>You can also contact us by phone or message here :</b></p>
+    
+    <div class="container py-5">
+    
+        
+        <div class="col">
+        <div class="card-body">
+      <div class="color-box">
+      <h4 class="card-title text-left"><b>Phone :: (+95) 9421125352</b></h4>
+      </div>
+      </div>
+      </div>
+
+      <div class="col">
+      <div class="card-body">
+    <div class="color-box">
+    <h4 class="card-title text-left"><b>Email :: aceinspiriation@gmail.com</b></h4>
+    </div>
+    </div>
+    </div>
+      
+    </div>
+    </div>
+
+
+<style>
+
+
+h1, h2, h3, h4, h5, h6 {
+ 
+  
+}
+.w3-sand, .w3-hover-sand:hover {
+    color: #000!important;
+    background-color: #ffffff!important;
+}
+.w3-center {
+    text-align: center!important;
+}
+.w3-large {
+    
+}
+
+.par {
+ 
+}
+
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+div {
+    display: block;
+}
+
+
+.card{
+  
+  background: #f9f6f2;
+
+border-radius: 30px;
+box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.div.card-body{
+background-color: white;
+}
+
+
+
+.card-body{
+padding: 25px;
+margin-top: -15px;
+}
+
+.card-title{
+text-align: lsft;
+color:#485ba3;
+          
+}
+
+
+.color-box {
+background: #f9f6f2;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ padding-left: 10px;
+display: inline-block;
+text-align: left;
+width: 60%;
+height: 50%; 
+margin: 0 auto;
+}
+
+
+
+
+</style>
+ 
+  </div>
+  
+<!-- End page content -->
+</div>
+   <div class="container-fluid  footer p-0 m-0 wow fadeIn mt-5" data-wow-delay="0.1s">
+            <div class="bg-primary text-light py-3">
+                <p class="text-center">@Copyright All Right Reserved!</p>
+                </div>
+        </div>
+
+      </div>
+<!-- JavaScript Libraries -->
+  <div th:replace="~{userFragments :: fo}"></div>
+   
+ 
+
+</body>
+</html>

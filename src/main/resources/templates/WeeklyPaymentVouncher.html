@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Admin Dashboard</title>
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/jquery.dataTables.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+</head>
+<body>
+
+	<div th:replace="~{fragments :: userProfileFragment}"></div>
+
+	<section class="container-fluid">
+		<div class="row">
+			<!-- sidebar start -->
+			<div th:replace="~{fragments :: html_sidebar}"></div>
+			<!-- sidebar end -->
+			<div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+				<!-- header start -->
+				<div th:replace="~{fragments :: html_header}"></div>
+				<!-- header end -->
+				<!-- content start -->
+				<div class="row  ">
+					<div class="col-12">
+						<div class="card mb-4">
+							<div class="card-body ">
+								<div class="d-flex justify-content-between align-items-center">
+									<h4 class="mb-0">
+										<i class="feather-codepen text-primary"></i> Total Register
+										Data
+									</h4>
+									<!-- <button class="btn btn-outline-primary btn-sm full-page-btn">
+										<i class="feather-maximize-2 h4"></i>
+									</button> -->
+									<div class="text-right"><button type="button" onclick="Convert_HTML_To_PDF();" class="btn text-white text-capitalize"
+                                    style="background-color: #176b9c">
+                                    <i class="fa-solid fa-file-arrow-down mr-2"></i> PDF
+                                </button></div>
+								</div>
+								<hr>
+								<div id="pdfPayment">
+ <div class="col-md-12">
+                                <div class="text-center">
+                                    
+                                    <img th:src="@{/userRole/img/images.png}" style="width:80px;">
+
+                                    <p class="pt-0 h4 mb-3">Payment Vouncher</p>
+                                </div>
+                               
+                            </div>
+                             <div class="row">
+									<div class="w-75 m-auto d-flex">
+										<div>
+											<p>Vouncher No:<span th:text="${'CS00'+id}"></span></p>
+											<p>Catering Service Name:<span th:text="${resName}"></span></p>
+										</div>
+										<div class="" style="margin-left: 250px;">
+											<p>Payment Date:<span th:text="${currentDate}"></span></p>
+											 <p>Invoice For:<span th:text="${sDate}"></span>-<span th:text="${eDate}"></span></p> 
+
+										</div>
+									</div>
+
+
+
+									<table class="table table-bordered  order-table w-75 m-auto">
+										<tr class="table-primary">
+											<th>#</th>
+											<th>Date</th>
+											<th class="text-center">No. of Pax</th>
+											<th>Price</th>
+											<th>Amount</th>
+											
+										</tr>
+										<tr th:each="weekList,i:${orderDetail.weeklyOrderList}">
+											<th scope="row" th:text="${i.index+1}"></th>
+
+											<td th:text="${weekList.date}"></td>
+											<td class="text-center" th:text="${weekList.totalPeople}"></td>
+											<td th:text="${weekList.price}"></td>
+											<td th:text="${weekList.totalPrice}"></td>
+											
+										</tr>
+										<tr >
+										<td class="text-center h5 " colspan="4">Total</td>
+										<td th:text="${totalPrice}"></td>
+										
+										</tr>
+										
+
+									</table>
+
+								</div>
+<div class="row my-5" >
+  <form class="d-flex justify-content-between w-75 m-auto ">
+      <div>
+      <p class="my-2 h5">Signature</p>
+          <label class="mt-2 h5">Cashier</label>
+         
+           <p th:text="${orderDetail.cashier}"></p>
+  
+      </div>
+      <div>
+      <p class="my-2 h5">Signature</p>
+          <label class="mt-2 h5">Received By</label>
+     <p th:text="${orderDetail.receivedBy}"></p>
+   
+      </div>
+      <div>
+      <p class="my-2 h5">Signature</p>
+          <label class="mt-2 h5">Approved By</label>
+       <p th:text="${orderDetail.approvedManager}"></p>
+      </div>
+       </form>
+
+</div>
+								
+								
+
+								
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- content end -->
+
+
+		</div>
+		</div>
+	</section>
+
+
+	<script th:src="@{/dashboard/vendor/jquery-3.3.1.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/dashboard/js/popper.min.js}"></script>
+	<script th:src="@{/dashboard/js/jquery.waypoints.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/data_table/jquery.dataTables.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/dashboard/js/app.js}"></script>
+	<script th:src="@{/dashboard/js/dashboard.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+
+	$(document).ready(function(){
+
+		var $logoutButton = $('#logoutButton');
+
+				// Add click event handler using jQuery
+				$logoutButton.on('click', function(event) {
+					console.log("in logout event!!");
+					event.preventDefault(); // Prevent the default behavior of the link
+
+					// Show SweetAlert dialog using SweetAlert2
+					Swal.fire({
+
+						text : "Are you sure?Do you want to logout?",
+						icon : "warning",
+						showCancelButton : true,
+						confirmButtonColor : "#3085d6",
+						cancelButtonColor : "#d33",
+						confirmButtonText : "logout"
+					}).then(function(result) {
+						if (result.isConfirmed) {
+							// Perform the logout action here
+							window.location.href = '/logout';
+						}
+					});
+				});
+
+				
+	})
+  window.jsPDF = window.jspdf.jsPDF;
+// console.log("dflk djoa jdfo [[${paymentSuccess}]]");
+
+// Convert HTML content to PDF
+function Convert_HTML_To_PDF() {
+    var doc = new jsPDF();
+	
+    // Source HTMLElement or a string containing HTML.
+    var elementHTML = document.querySelector("#pdfPayment");
+
+    doc.html(elementHTML, {
+        callback: function(doc) {
+            // Save the PDF
+            doc.save('payvouncher.pdf');
+        },
+        margin: [10, 10, 10, 10],
+        autoPaging: 'text',
+        x: 0,
+        y: 0,
+        width: 190, //target width in the PDF document
+        windowWidth: 800, //window width in CSS pixels
+        background: '#ffffff'
+    });
+} 
+ 
+ //Weekly Payment Vouncher Alert
+ var paymentSuccess = /*[[${paymentSuccess}]]*/null;
+// console.log("djfkdjf [[${testing}]]");
+
+    if (paymentSuccess) {
+        console.log(paymentSuccess);
+        Swal.fire({
+            text: paymentSuccess,
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        })
+           }
+		   function validate() {
+			var password1 = document.getElementById("password1").value;
+			var password2 = document.getElementById('password2').value;
+			if (password1 != password2) {
+				$(".error-msg").html("Password do not match!").show();
+				return false;
+			} else {
+				$(".error-msg").html("").hide();
+				return true;
+			}
+		}
+
+		$("#mySetup").validate({
+			rules : {
+				userName : {
+					minlength : 2,
+					maxlength : 100
+				},
+				opsw : {
+					minlength : 2,
+					maxlength : 8
+				},
+
+			},
+
+			messages : {
+
+				opsw : {
+					required : "Please enter your old password",
+					minlength : "Password length at least 2 character",
+					maxlength : "	Password length at most 8 character"
+				},
+				userName : {
+					required : "Please enter your  name",
+					minlength : " Name at least 2 character",
+					maxlength : "Name at most 100 character"
+				},
+
+				submitHandler : function(form) {
+					form.submit();
+				}
+
+			}
+		});
+
+    //Weekly Payment Vouncher Alert
+
+</script>
+	
+
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Admin Dashboard</title>
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/jquery.dataTables.min.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+	<section class="container-fluid">
+		<div class="row">
+			<!-- sidebar start -->
+			<div th:replace="~{fragments :: html_sidebar}"></div>
+			<!-- sidebar end -->
+			<div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+				<!-- header start -->
+				<div class="row header mb-3">
+					<div class="col-12 ">
+						<div th:replace="~{fragments :: html_header}"></div>
+						
+
+					</div>
+				</div>
+				<!-- header end -->
+				<!-- content start -->
+				<div class="row  ">
+					<div class="col-12">
+						<div class="card mb-4">
+							<div class="card-body ">
+								<div class="d-flex justify-content-between align-items-center">
+									<h4 class="mb-0">
+										<i class="feather-codepen text-primary"></i> Total Register
+										Data
+									</h4>
+									<!-- <button class="btn btn-outline-primary btn-sm full-page-btn">
+										<i class="feather-maximize-2 h4"></i>
+									</button> -->
+									<div class="col-4 text-right">
+										<button type="button" class="btn text-white text-capitalize"
+											style="background-color: #176b9c" onclick="Convert_HTML_To_PDF();">
+											<i class="fa-solid fa-file-arrow-down mr-2"></i> PDF
+										</button>
+									</div>
+								</div>
+								<hr>
+								<div id="pdfCon">
+								<div class="col-md-12">
+									<div class="text-center">
+										
+										<img th:src="@{/userRole/img/images.png}" style="width:80px;">
+
+										<p class="pt-0 h4">Weekly Lunch Order</p>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-8">
+										<p class="text-muted">Order Invoice</p>
+										<ul class="list-unstyled">
+											<li class="text-muted">
+												<!-- <i class="fas fa-circle" style="color: #176b9c"></i> -->
+												<span class="fw-bold">ID:<span th:text="${'CS00'+id}"></span></span>
+											</li>
+											<li class="text-muted">
+												<!-- <i class="fas fa-circle" style="color: #176b9c"></i> -->
+												<span class="fw-bold">Creation Date:<span th:text="${createdAt}"></span> </span>
+											</li>
+											<li class="text-muted">
+												<!-- <i class="fas fa-circle" style="color: #176b9c"></i> -->
+												<span class="fw-bold">Restaurant Name:<span th:text="${resName}"></span></span> </span>
+											</li>
+											<!-- <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
+                Unpaid</span></li> -->
+										</ul>
+									</div>
+									
+								</div>
+
+								<div class="row my-2 mx-1 justify-content-center">
+									<table class="table border-top table-bordered">
+										<thead class="text-black">
+											<tr class="table-primary">
+												<th scope="col">#</th>
+												<th scope="col">Date</th>
+												<th scope="col">Total People</th>
+												<th scope="col">Unit Price</th>
+												<th scope="col">Total Price</th>
+												<th scope="col">Avoid Meat</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="weekList,i:${orderDetail.weeklyOrderList}">
+												 <th scope="row" th:text="${i.index+1}"></th> 
+												<!-- <td th:text="${'CS00'+weekList.id}"></td> -->
+												<td th:text="${weekList.date}"></td>
+												<td th:text="${weekList.totalPeople}"></td>
+												<td th:text="${weekList.price}"></td>
+												<td th:text="${weekList.totalPrice}"></td>
+												<td>
+													<p th:each="avoid:${weekList.avoidMeatList}" class="m-0 ">
+														<i class="fa-solid fa-xmark text-danger  mr-2"> </i><span
+															th:text="${avoid.name}"></span>-<span
+															th:text="${avoid.count}"></span>
+
+													</p>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" colspan="4" class="text-center h5">Total</th>
+
+												
+												<td th:text="${totalPrice}"></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+								</div>
+
+</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- content end -->
+
+
+		</div>
+		</div>
+	</section>
+
+
+	<script th:src="@{/dashboard/vendor/jquery-3.3.1.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/dashboard/js/popper.min.js}"></script>
+	<script th:src="@{/dashboard/js/jquery.waypoints.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/data_table/jquery.dataTables.min.js}"></script>
+	<script
+		th:src="@{/dashboard/vendor/data_table/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/dashboard/js/app.js}"></script>
+	<script th:src="@{/dashboard/js/dashboard.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  window.jsPDF = window.jspdf.jsPDF;
+
+// Convert HTML content to PDF
+function Convert_HTML_To_PDF() {
+    var doc = new jsPDF();
+	
+    // Source HTMLElement or a string containing HTML.
+    var elementHTML = document.querySelector("#pdfCon");
+
+    doc.html(elementHTML, {
+        callback: function(doc) {
+            // Save the PDF
+            doc.save('payvouncher.pdf');
+        },
+        margin: [10, 10, 10, 10],
+        autoPaging: 'text',
+        x: 0,
+        y: 0,
+        width: 190, //target width in the PDF document
+        windowWidth: 800, //window width in CSS pixels
+        background: '#ffffff'
+    });
+} 
+ 
+</script>
+
+
+
+
+
+
+</body>
+</html>

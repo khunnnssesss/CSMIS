@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}" />
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+<link rel="stylesheet"
+	th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+<link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+<style>
+.swal2-container.swal2-center>.swal2-popup {
+	width: 25em !important;
+}
+
+.swal2-title {
+	padding-top: 0px !important;
+}
+
+.swal2-styled.swal2-confirm {
+	width: 80px !important;
+}
+</style>
+
+</head>
+<body>
+	<div th:replace="~{fragments :: userProfileFragment}"></div>
+	<section class="container-fluid">
+		<div class="row">
+			<!-- sidebar start -->
+
+			<div th:replace="~{fragments :: html_sidebar}"></div>
+
+			<!-- sidebar end -->
+			<div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+				<!-- header start -->
+				<div th:replace="~{fragments :: html_header}"></div>
+				<!-- header end -->
+				<!-- content start -->
+				<div class="row">
+					<div class="col-12 ">
+						<div class="float-right my-3">
+							<button class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModalLong">Announcement</button>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade mt-5" id="exampleModalLong" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">
+										<i class="mdi mdi-file-document-box menu-icon text-primary"></i>Announcement
+									</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form id="myform" name="myform" action="/admin/announce"
+										th:object="${annbean}" onsubmit="return validateForm()"
+										method="post" enctype='multipart/form-data'>
+										<div class="modal-body">
+											<div class="mb-3">
+												<label for="exampleFormControlInput1" class="form-label">Subject</label>
+												<input type="text" th:field="*{subject}" name="subject"
+													class="form-control" id="exampleFormControlInput1" required>
+											</div>
+											<div class="form-group">
+												<label for="exampleFormControlTextarea1">Announcement
+													Text</label>
+												<textarea class="form-control" th:field="*{content}"
+													name="content" id="exampleFormControlTextarea1" rows="3"
+													required></textarea>
+											</div>
+											<div class="mb-3">
+												<input type="date" th:field="*{date}" id="date" name="date"
+													class="form-control" required>
+											</div>
+											<div class="mb-3">
+												<input type="time" th:field="*{time}" id="time" name="time"
+													class="form-control" required>
+											</div>
+											<div class="mb-3">
+												<input type="file" th:field="*{image}" class="form-control"
+													id="fileInput" onchange="checkFileSelection()">
+										
+											</div>
+
+
+										</div>
+										<div class="modal-footer">
+											<button type="reset" class="btn btn-danger">Reset</button>
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancel</button>
+											<button type="submit" class="btn btn-primary">Send</button>
+
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Modal 2-->
+					<!-- profile setup -->
+					<!-- profile setup -->
+				</div>
+
+
+
+				<div class="row ">
+
+					<div class="col-12 col-md-6 col-lg-6 col-xl-3">
+						<div class="card mb-4 status-card"
+							onclick="go('https://google.com')">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-4">
+
+										<i class="fa-solid fa-utensils h1 text-info"></i>
+
+									</div>
+									<div class="col-8">
+										<p class="h4 mb-0 ">
+											<span class="counterup font-weight-bold"
+												th:text="${doorLogCount}"></span>
+										</p>
+										<p class="mb-0 text-black-50">Today Lunch Eat</p>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-6 col-xl-3">
+						<div class="card mb-4 status-card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-4">
+
+										<i class="feather-users h1 text-info"></i>
+
+									</div>
+									<div class="col-8">
+										<p class="h4 mb-0 ">
+											<span class="counterup font-weight-bold"
+												th:text="${registerCount}"></span>
+										</p>
+										<p class="mb-0 text-black-50">Total Register</p>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-6 col-xl-3">
+						<div class="card mb-4 status-card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-4">
+
+										<i class="fa-regular fa-bell h1 text-info"></i>
+
+									</div>
+									<div class="col-8">
+										<p class="h4 mb-0 ">
+											<span class="counterup font-weight-bold"
+												th:text="${mailNotiCount}"></span>
+										</p>
+										<p class="mb-0 text-black-50">Total Mail Noti</p>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-6 col-xl-3">
+						<div class="card mb-4 status-card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-4">
+
+										<i class="fa-regular fa-comments h1 text-info"></i>
+
+									</div>
+									<div class="col-8">
+										<p class="h4 mb-0 ">
+											<span class="counterup font-weight-bold"
+												th:text="${feedbackCount}"></span>
+										</p>
+										<p class="mb-0 text-black-50">Month Feedback</p>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-6 card p-3 ml-3">
+						<canvas id="lineChart" style="margin-top:30px;height:350px;"></canvas>
+					</div>
+					<div class="col-12 col-md-4 col-lg-5 card p-3 ml-2  meat-height">
+						<canvas id="meatChart"></canvas>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-6">
+						<div class="card m-2 mt-3">
+
+							<div class="card-body pb-0">
+								<h5 class="card-title">Summary</h5>
+								<div class="d-flex">
+									<p class="price-img text-center px-2 mr-4">
+										<i
+											class="fa-solid fa-money-check-dollar pt-1 h3 text-primary "></i>
+									</p>
+									<div>
+										<p class="mb-0">Costing Price</p>
+										<div class="form-check">
+
+											<input class="form-check-input" type="radio"
+												name="flexRadioDefault" id="flexRadioDefault1" checked>
+											<label class="form-check-label" for="flexRadioDefault1">
+												Weekly </label>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between p-0">
+
+										<p class="badge bg-primary text-white ">
+											<span class="h5">DAT Cost</span>
+										</p>
+										<p th:text="${datCost != null ? datCost + 'MMK' : '0'}"></p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between p-0 mt-3">
+
+										<p class="badge bg-success text-white ">
+											<span class="h5">Employee Cost</span>
+										</p>
+										<p th:text="${empCost+'MMK'}"></p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between p-0 mt-3">
+
+										<p class="badge bg-warning text-white ">
+											<span class="h5">Restaurant Cost</span>
+										</p>
+										<p th:text="${summaryCost+'MMK'}"></p>
+									</li>
+								</ul>
+							</div>
+							<hr>
+							<div class="card-body pt-0">
+								<p class="text-muted">Show more details for DAT,EMPLOYEE &
+									RESTAURANT Cost in daily,weekly & Monthly</p>
+								<a href="/admin/costList" class="card-link btn btn-info  w-50">Cost List</a>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-6">
+						<div class="card mt-3">
+
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">
+									We create easily import<span class="text-success">
+										Employee Data,Menu,Holidays & Doorlog</span>
+								</p>
+								<div class="text-center">
+									<a href="/admin/import" class="btn btn-info  text-center w-50">Import</a>
+								</div>
+							</div>
+						</div>
+						<div class="card mt-3">
+
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">
+									We create easily <span class="text-success">order</span> for
+									weekly register
+								</p>
+								<div class="text-center">
+									<a href="/admin/order" class="btn btn-info  text-center w-50">Order</a>
+								</div>
+							</div>
+						</div>
+						<div class="card mt-3">
+
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">
+									We can easily view for<span class="text-success"> paid
+										and unpaid list</span>
+								</p>
+								<div class="text-center">
+									<a href="/admin/weeklyOrderList"
+										class="btn btn-info  text-center w-50">Payment List</a>
+								</div>
+							</div>
+						</div>
+						<div class="card mt-3 mb-3">
+
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">
+									We can easily view for<span class="text-success">
+										register,unregister & no eat lunch list</span>
+								</p>
+								<div class="text-center">
+									<a href="/admin/lunchAllList"
+										class="btn btn-info  text-center w-50">Lunch All List</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+
+	<div th:replace="~{fragments :: html_script}" /></div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript">
+		function validate() {
+			var password1 = document.getElementById("password1").value;
+			var password2 = document.getElementById('password2').value;
+			if (password1 != password2) {
+				$(".error-msg").html("Password do not match!").show();
+				return false;
+			} else {
+				$(".error-msg").html("").hide();
+				return true;
+			}
+		}
+		
+		var monthCountList = /*[[${monthCountList}]]*/[];
+		console.log(monthCountList);
+		var monthLabels = [];
+		var registerEatData = [];
+		var registerNoEatData = [];
+		var unregisterEatData = [];
+		var monthNames = [ "Jan", "Feb", "March", "April", "May", "Jun",
+				"July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+		for (var i = 0; i < 12; i++) {
+			monthLabels.push(monthNames[i]);
+			registerEatData.push(0);
+			registerNoEatData.push(0);
+			unregisterEatData.push(0);
+		}
+		for (var i = 0; i < monthCountList.length; i++) {
+			var monthCount = monthCountList[i];
+			var monthIndex = monthCount.month - 1; // Subtract 1 to convert from 1-based index to 0-based index
+
+			registerEatData[monthIndex] = monthCount.registerEat;
+			registerNoEatData[monthIndex] = monthCount.registernoEat;
+			unregisterEatData[monthIndex] = monthCount.unregisterEat;
+
+		}
+		console.log(monthLabels);
+		console.log(registerEatData);
+		console.log(registerNoEatData);
+		console.log(unregisterEatData);
+		/* let month=['Jan','Feb','March','April','May','Jun','July','Aug','Sept','Oct','Dec'];
+		 let registerEat=[15,20,60,40,25,50,35,75,65,35,55,60];
+		 let registerNoEat=[8,10,12,9,10,16,7,39,21,7,6,5];
+		 let unRegisterEat=[10,5,4,8,9,12,20,16,6,9,11,33];*/
+		let ctx = document.getElementById('lineChart').getContext('2d');
+		let myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : monthLabels,
+				datasets : [ {
+					label : 'Register Eat',
+					lineTension : 0,
+					data : registerEatData,
+					backgroundColor : [ '#007bff30',
+
+					],
+					borderColor : [ '#007bff',
+
+					],
+					borderWidth : 1,
+
+				}, {
+					label : 'Register No Eat',
+					lineTension : 0,
+					data : registerNoEatData,
+					backgroundColor : [ '#ffc107',
+
+					],
+					borderColor : [ '#ffc107',
+
+					],
+					borderWidth : 1,
+
+				}, {
+					label : 'Unregister Eat',
+					lineTension : 0,
+					data : unregisterEatData,
+					backgroundColor : [ 'red',
+
+					],
+					borderColor : [ 'red',
+
+					],
+					borderWidth : 1,
+
+				} ]
+			},
+			options : {
+				elements : {
+					arc : {
+						borderWidth : 0
+					// Set the border width to 0 to hide the vertical line
+					}
+				},
+				scales : {
+					// y: {
+					//     beginAtZero: true
+					// },
+					yAxes : [ {
+						display : false,
+						gridLines : {
+							display : false
+						}
+
+					} ],
+					xAxes : [ {
+						display : false,
+						gridLines : {
+							display : false
+						}
+					} ],
+				},
+				legend : {
+					display : true,
+					position : 'top',
+					labels : {
+						fontColor : "#6c757d",
+						usePointStyle : true
+					}
+
+				}
+			}
+
+		});
+		var avoidCountList = /*[[${avoidCountList}]]*/[];
+		var avoidMeatLabels = [];
+		var avoidCounts = [];
+		for (var i = 0; i < avoidCountList.length; i++) {
+			var avoidCount = avoidCountList[i];
+			avoidMeatLabels.push(avoidCount.avoidMeat);
+			avoidCounts.push(avoidCount.avoidCount);
+		}
+		const op = document.getElementById('meatChart').getContext('2d');
+		const myop = new Chart(op, {
+			type : 'doughnut',
+			data : {
+				labels : avoidMeatLabels,
+				datasets : [ {
+					label : '# of Votes',
+					data : avoidCounts,
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				},
+				legend : {
+					display : true,
+					position : 'top',
+					labels : {
+						fontColor : "#6c757d",
+						usePointStyle : true
+					}
+				}
+			}
+		});
+		$("#mySetup").validate({
+			rules : {
+				userName : {
+					minlength : 2,
+					maxlength : 100
+				},
+				opsw : {
+					minlength : 2,
+					maxlength : 8
+				},
+
+			},
+
+			messages : {
+
+				opsw : {
+					required : "Please enter your old password",
+					minlength : "Password length at least 2 character",
+					maxlength : "	Password length at most 8 character"
+				},
+				userName : {
+					required : "Please enter your  name",
+					minlength : " Name at least 2 character",
+					maxlength : "Name at most 100 character"
+				},
+
+				submitHandler : function(form) {
+					form.submit();
+				}
+
+			}
+		});
+
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0');
+		var yyyy = today.getFullYear();
+
+		today = yyyy + '-' + mm + '-' + dd;
+		$('#date').attr('min', today);
+
+		function checkFileSelection() {
+			var fileInput = document.getElementById("fileInput");
+			var message = document.getElementById("message");
+
+			if (fileInput.files.length > 0) {
+				message.style.display = "none";
+			} else {
+				message.style.display = "block";
+			}
+		}
+
+		$("#myform").validate({
+
+			messages : {
+				subject : {
+					required : "Please enter subject!!",
+
+				},
+				content : {
+					required : "Please enter content!!",
+
+				},
+				date : {
+					required : "Date can't be null!!",
+
+				},
+				time : {
+					required : "Time can't be null!!",
+
+				},
+				submitHandler : function(form) {
+					form.submit();
+				}
+
+			}
+		});
+		var message = /*[[${success}]]*/null;
+		console.log("hdf");
+		if (message) {
+
+			Swal.fire({
+				text : message,
+				icon : 'success',
+				confirmButtonColor : '#ff1f5a',
+				confirmButtonText : 'OK'
+			});
+		}
+	</script>
+
+</body>
+</html>

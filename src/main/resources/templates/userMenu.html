@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{userFragments :: html_userhead}"/>
+<style>
+
+	*{
+		/* border: 1px solid red; */
+	}
+
+
+.card {
+       border-radius: 40px; 
+       overflow: hidden;
+       border: 0;
+       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06),
+                   0 2px 4px rgba(0, 0, 0, 0.07);
+       transition: all 0.15s ease;
+}
+
+.card:hover {
+             box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1),
+                         0 10px 8px rgba(0, 0, 0, 0.015);
+}
+
+.card-body .card-title {
+                  font-family: 'Lato', sans-serif;
+                  font-weight: 700;
+                  letter-spacing: 0.3px;
+                  font-size: 24px;
+                  color: #121212;
+}
+
+.card-text {
+             font-family: 'Lato', sans-serif;
+             font-weight: 400;
+             font-size: 15px;
+             letter-spacing: 0.3px;
+             color: #4E4E4E;
+  
+}
+
+.card .container {
+           width: 88%;
+          background: #F0EEF8;
+           border-radius: 30px;
+           height: 90px;
+         display: flex;
+        align-items: center;
+         justify-content: center;
+}
+
+.container:hover > img {
+                       transform: scale(1.2);
+}
+
+.container img {
+                padding: 75px;  
+               margin-top: -40px;
+               margin-bottom: -40px;
+              transition: 0.4s ease;
+              cursor: pointer;
+}
+.anno-fixed{
+ position: fixed;
+  bottom: 10px;
+  right: 5px;
+  z-index:100;
+  }
+ 
+ @media (width >= 600px) {
+	.img-h{
+		/* height: 550px; */
+	}
+ }
+
+ @media (width <= 990px) {
+	.imgheight{
+		
+		/* height: 50rem; */
+	}
+ }
+
+ @media (width <= 770px) {
+	
+	.imgheight{
+		/* height: 75rem; */
+	}
+ }
+
+ .line-box{
+ position:relative;}
+ .line1{
+ background:#1e2a78;
+ position:absolute;
+ left: 145px;
+width: 60px;
+    height: 3px;
+    }
+     .line2{
+     background:#1e2a78;
+      position:absolute;
+      left: 247px;
+width: 60px;
+    height: 3px;
+  }
+  .img-box{
+  position:absolute;
+ left: 220px;
+    bottom: -29px;
+  }
+  .line-img{
+  color:#1e2a78;}
+  .swal2-container.swal2-center>.swal2-popup{
+    width:360px;}
+
+	//william
+	@import url("https://fonts.googleapis.com/css?family=Poppins|Lato|Roboto+Mono&display=swap");
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: lighten(#CB8589, 5%);
+  font-family: "Helvetica Neue", "Roboto Mono", "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+}
+
+#carousel-wrapper {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  #menu {
+    height: 380px;
+    width: 720px;
+    overflow: hidden;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: all 0.6s ease-in-out;
+
+    #current-option {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translate(-25%, 0%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      //background-color: blue;
+      overflow: hidden;
+
+      #current-option-text1 {
+        font-size: 3rem;
+        line-height: 3rem;
+        width: 220px;
+        /* height: 200px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        //background: red;
+
+        &::before {
+          content: attr(data-next-text);
+          position: absolute;
+          transform: translate(0%, 380px);
+          width: 100%;
+          height: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          //background: red;
+        }
+
+        &::after {
+          content: attr(data-previous-text);
+          position: absolute;
+          transform: translate(0%, -380px);
+          width: 100%;
+          height: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          //background: red;
+        }
+      }
+
+      #current-option-text2 {
+        margin-left: 135px;
+    text-align: left;
+        font-size: 1.6rem;
+        width: 300px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        //background: green;
+
+        &::before {
+          content: attr(data-next-text);
+          position: absolute;
+          transform: translate(0%, 380px);
+          width: 100%;
+          height: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-end;
+          //background: green;
+        }
+
+        &::after {
+          content: attr(data-previous-text);
+          position: absolute;
+          transform: translate(0%, -380px);
+          width: 100%;
+          height: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-end;
+          //background: green;
+        }
+      }
+    }
+
+    #previous-option {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: none;
+      display: block;
+      cursor: pointer;
+      background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+      background-size: cover;
+      position: absolute;
+      transform: translate(0, 155px);
+    }
+
+    #next-option {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: none;
+      display: block;
+      cursor: pointer;
+      background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+      background-size: cover;
+      position: absolute;
+      transform: translate(0, -152px) rotate(180deg);
+    }
+  }
+
+  #image {
+    height: 140px;
+    width: 340px;
+	overflow: hidden;
+	/* min-width: 50px; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 0;
+    /* position: absolute; */
+    /* transform: translate(140px, 0); */
+  }
+
+  &.anim-next {
+    pointer-events: none;
+
+    #current-option-text1 {
+      animation: next-text 0.65s 0.085s;
+    }
+
+    #current-option-text2 {
+      animation: next-text 0.65s 0.085s;
+    }
+
+    #previous-option {
+      animation: next-top-arrow 0.65s 0.085s;
+    }
+
+    #next-option {
+      animation: next-bottom-arrow 0.65s 0.085s;
+    }
+    
+    #image {
+      animation: next-image 0.65s 0.085s;
+    }
+  }
+
+  &.anim-previous {
+    pointer-events: none;
+
+    #current-option-text1 {
+      animation: previous-text 0.65s 0.085s;
+    }
+
+    #current-option-text2 {
+      animation: previous-text 0.65s 0.085s;
+    }
+
+    #previous-option {
+      animation: previous-top-arrow 0.65s 0.085s;
+    }
+
+    #next-option {
+      animation: previous-bottom-arrow 0.65s 0.085s;
+    }
+    
+    #image {
+      animation: previous-image 0.65s 0.085s;
+    }
+  }
+}
+
+@keyframes previous-text {
+  50%,
+  55% {
+    transform: translate(0%, 390px);
+  }
+  to {
+    transform: translate(0%, 380px);
+  }
+}
+
+@keyframes previous-top-arrow {
+  50% {
+    transform: translate(310px, 53px);
+  }
+}
+
+@keyframes previous-bottom-arrow {
+  50% {
+    transform: translate(310px, -47px) rotate(180deg);
+  }
+}
+
+@keyframes previous-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes next-text {
+  50%,
+  55% {
+    transform: translate(0%, -390px);
+  }
+  to {
+    transform: translate(0%, -380px);
+  }
+}
+
+@keyframes next-top-arrow {
+  50% {
+    /* transform: translate(310px, 47px); */
+  }
+}
+
+@keyframes next-bottom-arrow {
+  50% {
+    /* transform: translate(310px, -53px) rotate(180deg); */
+  }
+}
+
+@keyframes next-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
+	
+
+</style>
+
+<body>
+	<div class="container-fluid bg-gradient p-0">
+		<!-- Spinner Start -->
+		<div id="spinner"
+			class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+			<div class="spinner-border text-primary"
+				style="width: 3rem; height: 3rem;" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<!-- Spinner End -->
+
+
+		<!-- Navbar & Hero Start -->
+		<div class="container-fluid p-0 navFixed">
+			<div th:replace="~{userFragments :: user_sidebar}"></div>
+		</div>
+		
+		<!-- Button trigger modal -->
+
+		<!-- Modal 2-->
+		<!-- <div th:replace="~{userFragments ::  changepassword_sidebar}"></div> -->
+		<div th:replace="~{userFragments :: profile_sidebar}"></div>
+		
+			<!-- Modal 2 End -->
+
+
+		<div class="container-xxl hero-header">
+			<div class="container">
+
+				<div class="row align-items-center">
+					<div class="col-12">
+						<div class="w-30 mx-auto">
+							<marquee width="100%" direction="left" height="50px"
+								class="text-white float-end">
+								<p class="text-black-50 fs-4 fw-semibold fst-italic">
+								
+									Welcome! <span class=" fs-4">DAT Catering Service
+										Management Information System</span>
+								</p>
+							</marquee>
+						</div>
+					</div>
+					</div>
+
+					
+
+
+					
+				<!-- 	<div class="col-lg-5 text-center text-lg-start header-text">
+						<h3 class="display-3 text-dark animated slideInLeft">
+							Enjoy Our<br>Delicious Meal
+						</h3>
+
+						<a href="register.html"
+							class="btn btn-primary py-sm-2 px-sm-3 me-3 animated slideInLeft">Register
+							Now</a>
+					</div>
+					 -->
+
+
+					 <!-- Menu and register Button Start -->
+					 <div class="row  d-flex justify-content-between img-h imgheight mb-5 pb-5 mb-lg-0 pb-lg-0">
+										<div class="col-12 col-xl-7 text-center text-lg-start">
+												<div class="row">
+													<div class="col-12">
+														<h3 class="display-3 text-dark animated slideInLeft">Enjoy Our<br>Delicious Meal</h3>
+												
+												<a href="/user/register" class="btn btn-primary py-sm-2 px-sm-3 me-3 animated slideInLeft">Register Now</a>
+													</div>
+													
+												
+												
+												<!--  Announcement Section Start-->
+												<div id="carousel-wrapper" class=" col-12 mt-5">
+												  <div id="menu">
+												      <div id="current-option" class="">
+												        <h1 id="current-option-text1" class="text-center border" data-previous-text="" data-next-text=""></h1>
+												        <h3 id="current-option-text2" data-previous-text="" data-next-text=""></h3>
+												      </div>
+												     
+													  
+														<button id="previous-option"></button>
+													  
+												  <div id="image" class=""></div>
+
+												   
+													<button id="next-option" class=""></button>
+												  
+												  </div>
+												  <!-- <div id="image" class="d-none"></div> -->
+												</div>
+												<!-- Announcement Section End -->
+												
+												
+												
+															<!-- <div class="col-12 m-auto">
+															<div th:each="ann :${userAnn}" >
+															<div class="card text-black mb-2">
+															
+															  <img th:src="@{/images/__${ann.image}__}" class="card-img" alt="...">
+															  <div class="card-img-overlay" >
+															  <div class="d-flex justify-content-between">
+																<h3 class="card-title" ><i th:text="${ann.subject}"></i></h3>
+																<p th:text="${'Expire in '+ ann.dateTime}" style="font-size: 12px;"></p>
+																</div>
+																<span class="card-text" th:text="${ann.contant}"></span>
+																<div class="float-right" id="ann">
+																<p class="card-text" th:text="${'Announcement from '+ ann.dateNow}" style="font-size: 12px;"></p>
+																</div>
+															  </div>
+															  
+															</div>
+															</div>
+															</div> -->
+											
+													</div>
+												</div>
+										
+										<div class="col-12 col-xl-5 text-center mt-1 h-md-50 h-100 ">
+											
+											<div class="card">
+												<div>
+												<div class=" fs-4 mt-3">Weekly Menu</div>
+												<div class="line-box mt-2">
+												<p class=" line1 "></p>
+												<p class=" line2 "></p>
+												<p class="img-box"><i class="fa-solid fa-star-of-life line-img"></i></p>
+												</div>
+												</div>
+												  <img th:src="@{/images/output.png} " class="p-0 m-0 h1 ml-5 w-100" alt="menu"/>
+												  </div>
+
+										</div>
+					</div>
+					<!-- Menu and register Button End -->
+
+
+
+
+					<div class="d-none" style="margin-top:-50px;">
+					<div class="animate__animated animate bounce card anno-fixed" style="width: 18rem;">
+  <div class="container mt-3">
+  <!--   <img src="https://i.ibb.co/gRpP2Lm/icons8-online-128.png" class="card-img-top " alt="..."> -->
+  <img src="https://static.vecteezy.com/system/resources/previews/015/116/249/original/3d-megaphone-announcement-product-promotion-alert-png.png" class=" card-img-top">
+   <!--  <i class="fa-solid fa-bullhorn w-100 fs-1 text-center"></i> -->
+    </div>
+  <div class="card-body">
+    <h5 class="card-title ms-1">Website</h5>
+    <p class="card-text mb-5 ms-1">See more bootstrap code snippets on my website</p>
+
+    
+  </div>
+</div>
+					
+					</div>
+					 
+				
+			</div>
+		</div>
+
+		<!-- Navbar & Hero End -->
+
+
+
+
+		
+
+
+		<!-- Back to Top -->
+		<!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
+	</div>
+
+	<!-- Footer Start -->
+	<footer class="footer w-100 wow fadeIn bg-primary" data-wow-delay="0.1s">
+      <div class="container text-center text-light py-3">
+          <p class="">@Copyright All Right Reserved!</p>
+          </div>
+        </footer>
+<!-- Footer End -->
+
+	<!-- JavaScript Libraries -->
+	
+	<div th:replace="~{userFragments :: fo}"></div>
+	<script
+		th:src="@{https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
+	<script
+		src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+
+
+ 
+<script>
+//william
+
+const text1_options = '[[${subject}]]'.slice(1,'[[${subject}]]'.length-1).split(',');
+const text2_options = '[[${content}]]'.slice(1,'[[${content}]]'.length-1).split(',');
+const color_options = '[[${color}]]'.slice(1,'[[${color}]]'.length-1).split(',');
+const image_options = '[[${img}]]'.slice(1,'[[${img}]]'.length-1).split(',');
+console.log('subject==',);
+console.log('subjectss==',text1_options);
+console.log('subject==',color_options);
+console.log('images==',image_options);
+var i = 0;
+const currentOptionText1 = document.getElementById("current-option-text1");
+const currentOptionText2 = document.getElementById("current-option-text2");
+const currentOptionImage = document.getElementById("image");
+const carousel = document.getElementById("carousel-wrapper");
+const mainMenu = document.getElementById("menu");
+const optionPrevious = document.getElementById("previous-option");
+const optionNext = document.getElementById("next-option");
+
+currentOptionText1.innerText = text1_options[i];
+currentOptionText2.innerText = text2_options[i];
+currentOptionImage.style.backgroundImage ="url("+image_options[i]+")";
+
+
+
+mainMenu.style.background = color_options[i];
+
+optionNext.onclick = function () {
+i = i + 1;
+i = i % text1_options.length;
+currentOptionText1.dataset.nextText = text1_options[i];
+
+currentOptionText2.dataset.nextText = text2_options[i];
+
+mainMenu.style.background = color_options[i];
+carousel.classList.add("anim-next");
+
+setTimeout(() => {
+currentOptionImage.style.backgroundImage = "url("+image_options[i]+")";
+}, 455);
+
+setTimeout(() => {
+currentOptionText1.innerText = text1_options[i];
+currentOptionText2.innerText = text2_options[i];
+carousel.classList.remove("anim-next");
+}, 650);
+};
+
+optionPrevious.onclick = function () {
+if (i === 0) {
+i = text1_options.length;
+}
+i = i - 1;
+currentOptionText1.dataset.previousText = text1_options[i];
+
+currentOptionText2.dataset.previousText = text2_options[i];
+
+mainMenu.style.background = color_options[i];
+carousel.classList.add("anim-previous");
+
+setTimeout(() => {
+currentOptionImage.style.backgroundImage = "url("+image_options[i]+")";
+}, 455);
+
+setTimeout(() => {
+currentOptionText1.innerText = text1_options[i];
+currentOptionText2.innerText = text2_options[i];
+carousel.classList.remove("anim-previous");
+}, 650);
+};
+
+
+
+//william
+console.log("test on [[${test}]]");
+var pdf=$("#pdf").val();
+
+
+console.log("hello [[${session.photo}]]");
+const PDFStart = nameRoute => {           
+    let loadingTask = pdfjsLib.getDocument(nameRoute),
+        pdfDoc = null,
+        canvas = document.querySelector('#cnv'),
+        ctx = canvas.getContext('2d'),
+        scale = 0.5,
+        numPage = 1;
+
+        const GeneratePDF = numPage => {
+
+            pdfDoc.getPage(numPage).then(page => {
+
+                let viewport = page.getViewport({ scale: scale });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                
+                let renderContext = {
+                    canvasContext : ctx,
+                    viewport:  viewport
+                }
+
+                page.render(renderContext);
+            })
+           
+
+        }
+
+      
+
+        loadingTask.promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+         
+            GeneratePDF(numPage)
+        });
+}
+
+const startPdf = () => {
+    PDFStart(pdf)
+}
+
+window.addEventListener('load', startPdf);
+
+		const togglePassword = document.querySelector('#togglePassword');
+		const password = document.querySelector('#id_password');
+
+		togglePassword.addEventListener('click', function(e) {
+			// toggle the type attribute
+			const type = password.getAttribute('type') === 'password' ? 'text'
+					: 'password';
+			password.setAttribute('type', type);
+			// toggle the eye slash icon
+			this.classList.toggle('fa-eye-slash');
+		});
+		
+	
+		
+		console.log('user photo :: [[${session.photo}]]');
+		
+		
+		
+		
+	</script>
+</body>
+
+</html>
+<!-- hnin theint theint pho -->

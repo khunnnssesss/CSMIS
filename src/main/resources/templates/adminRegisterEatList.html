@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" 
+     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+     <style>
+    .dataTables_length{
+    width:200px;}
+    .dataTables_length label{
+    display:flex;
+    }
+    #example_filter label{
+    display:flex;}
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+    <section class="container-fluid">
+        <div class="row">
+            <!-- sidebar start -->
+            
+           <div th:replace="~{fragments :: html_sidebar}" ></div>
+          
+            <!-- sidebar end -->
+            <div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+                <!-- header start -->
+               <div th:replace="~{fragments :: html_header}"></div>
+                <!-- header end -->
+                <!-- content start -->
+                <div class="row">
+                   
+                     <!-- Modal -->
+
+  <!-- Modal 2-->
+  <!-- Modal -->
+<div class="modal fade mt-5" id="profileSetupModal" tabindex="-1" role="dialog" aria-labelledby="profileSetupModalLable" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="feather-user text-primary"></i>Profile Setup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                 <div class="col-5">
+                     <div class="mb-3"><img
+       src="img/user/avatar1.jpg"
+       class="img-thumbnail"
+       style="width:150px;"
+     /></div>
+                 <label for="formFileMultiple" class="form-label">Profile Upload</label>
+     <input class="form-control" type="file" id="formFileMultiple" multiple />
+                </div>
+                <div class="col-7">
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Employee ID</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Name</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Email</label>
+     <input class="form-control" type="email" id="formFileMultiple" />
+                 </div>
+     
+                </div>
+                </div>
+                 </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+                </div>
+                <div class="row ">
+                   
+                               
+                                </div>
+                                <div class="row ">
+                                <form action="/admin/re/{selectedDate}" method ="post">
+                                    <div class="col-12">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                              <div class="d-flex justify-content-between align-items-center">
+                                               <h4 class="mb-0">
+                                                
+                                                <a href="/admin/doorlogcard" class="btn btn-outline-warning">
+                                                  <i class="fa-solid fa-circle-chevron-left"></i>
+                                                </a>
+                                                   Register & Eat Lists
+                                               </h4> 
+                                               <button class="btn btn-outline-primary btn-sm full-page-btn"><i class="feather-maximize-2 h4"></i></button>  
+                                              </div> 
+                                              <hr> 
+                                              
+                                           <table id="example" class="table table-striped " style="width:100%">
+                                          
+                                <thead class="bg-primary text-white">
+                                
+                              
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Staff ID</th>
+                                        <th>Name</th>
+                                        <th>DoorLog No:</th>
+                                        <th>Date</th>
+                                        <th>Eat</th>
+                                        <th>Status</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr th:each="data, index : ${relist}" th:with="rowIndex=${index.index+1}">
+                                     <td th:text="${rowIndex}"></td>
+            						 <td th:text="${data.staffId}"></td>
+           						    <td th:text="${data.name}"></td>
+          						    <td th:text="${data.doorLogNo}"></td>
+          						    <td th:text="${data.date}"></td>
+           						    <td th:text="${data.eat}"></td>
+          						    <td th:text="${data.status}"></td>
+          						    
+       
+                                </tbody>
+                                
+                            </table>
+                                              
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                
+                       </form>
+                    </div>
+                  
+            </div>
+        
+    </section>
+
+
+<div th:replace="~{fragments :: html_script}"/></div>
+<script>
+   
+  
+$(document).ready(function() {
+    function getDatetime() {
+      const currentdate = new Date();
+      return (
+        "Report Date: " +
+        currentdate.getDate() +
+        "/" +
+        (currentdate.getMonth() + 1) +
+        "/" +
+        currentdate.getFullYear()
+      );
+    }
+
+    var tbl = $("#example");
+    $("#example").DataTable({
+      fixedColumns: true,
+      lengthChange: true,
+      pageLength: 5,
+      lengthMenu: [5, 10, 20, 50],
+      dom: "ZBflrtip",
+      buttons: [
+        "copy",
+        "csv",
+        {
+          extend: "excelHtml5",
+          title: "Register Eat List",
+          message: getDatetime(),
+        },
+        "print",
+        {
+          extend: "pdfHtml5",
+          pageSize: "A4",
+          title: "Register Eat List",
+         // message: getDatetime(),
+          customize: function(doc) {
+          
+          
+            if (doc.content[1] && doc.content[1].table) {
+              doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join("*").split(""); // Set equal width for all columns
+              doc.content[1].table.widths.unshift("*"); // Add "*" for the first column
+
+              doc.content[1].table.width = "100%"; // Set width to 100%
+
+              // Set text alignment to center for all cells
+              var rowCount = doc.content[1].table.body.length;
+              for (var i = 0; i < rowCount; i++) {
+                var columnCount = doc.content[1].table.body[i].length;
+                for (var j = 0; j < columnCount; j++) {
+                  doc.content[1].table.body[i][j].alignment = "center";
+                }
+              }
+            }
+           doc.content.splice(1, 0,
+               { text:  getDatetime(), style: 'header' }
+                 );
+           
+          
+             doc.content.splice( 0, 0, {
+                    margin: [ 0, 0, 0, 5 ],
+                    alignment: 'center',
+                    width: 50,
+                    height: 50,
+                    image:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAACgCAMAAABg6OMoAAAAz1BMVEX///8zZpn/zDP19/kkXpV0kbPQ2uZ3lbfa4+34+vy4xdaBnr0uZJf/yyv+01D/+euIo8GYq8UZWZLp7vRGcaBFbJHcukldgqr/zy5WgKuxwNIrY5u4p2X//vnAzt1bd4v/89b/yBWluM7/0ycfYJ7+5qb/1GH/z0X/2nr/7sL/4pr/6rZOeKQAU487aZT/+OT/12//4I3iz5zGsV+dl2xqfYJ2hH8AWaLQtUqQkGqKjHzivkPNsldheof0yjSOknVOco23vr64t6LqxTqqn2bhFYOXAAAJgUlEQVR4nO1caXvaOBfFtgATZBabhsWBAIGQpFnaybSZaZpp3zf9/79pbPAi6R4Z2tj46Tw+/VZbsg66urtSq1WoUKFChQq/DaYPZa8gF8w/TsteQh5YX3bLXkIeuHSuy15CDpg7i5uy15AD1gtnU/YacsClYy5+f101d0zzPyBV64CGc1n2Kt6K7lVAwzTnZa/jjZhvQhrOuux1vBHr7WY4H35vQz79sKVhbuZlr+RNeNixMJ33Za/kTVgvIhpXeUiVpUErh7kzcRnvRie2gLql7Eet1a83Edr9AMvJycy2PeuXltnoAzSSx7FMpVJlteFKDkCvZtXvGIQbgHFjcHtbb/dP7J+n0b5zCe6ayeP3i5jG4mr3P56BV7IX7m1AgxlZ4DsYg+bM+ykW3pCD2cbxJLGe2m7H7nB4AzDiEPDxXhrJq8z9OSYNvKhZ9Hi+SViYi+uj0dgy4cPJwUSWcE28H6mOdboZgQU8Jo0AzB+fHMbCasJ5eX2nL6ZXAg1z0z0ujXBL6gdtiH2Ld2NgRzIl0jCvj03DMNzBLJPADjMXj2a73XwvsXC2CZLj0jCYsdxPo62ZljWpTAVBx8PxaQSCNdlLw9Asibvh0wdTwXUJNAIe+/ZDJ1OGcRca8tT2RSr3pgwawW+6Zz/6WhpuL3jccWQaTqdbBo1AZBpZLKyxdkUsULldhYW5DWVLoGGwcZbDaGd8M1C5qkwF23FTBI2dH5U9tp/hymMTHg2cKHpqJ1XTQnZjEPzjoYurHWvozUernrEg1n7YqCzMMO2WNw1Wn20xmbQHrqubmw21YqUx4fFH/6AszMU6cNRd1QWH0xzqqLN2LC8ty+4PdERcrdY9yfxZ+eOI0nA6NatHMETD6+S1/h4aIayJ5rflhsa7stqZNFZ/gt3ACZITMJyhr+6nEcjIEJ8f3XZ4srpVOfmf/kE8UNoN0kCR6CE0gsOHvW7N6ZhJC2fqyeXvTgELmCDJl0bNxuqX4+BDMeET1aKvzuDhmBdOI5gP8QAvhvDFd1nTJjQ+Axow7ZY3DXxq+S2a0rsT33EnnqoiOEdnYwGkKm8atQaWKuQhLsVfP3C+WuQTT3+h7TBpVTZ3GjVo7fe/GaZ0+upPsPr7Am0HrcrmT4NI+HaRA6rE7YE610wd5p8jletcHYFGDRoPl/rrsgnnS+CbBCoX6aoNkaoCaCwhDWIBW5Iy2DqQ9HDwMxpxIKkqgIaHbAcbktckE77TZX31G/4XJFWLj8egAZOyA/W1mS9N1QynAofjGemqjipVBdBoofiauofyL8/64f/ZJJLgX6HKVaWqABq1CbSAs8z5do8tEkat/oSG/EaxgEXQgDlyNWXVkLyWWCGTjfRfoMpV+5KKoAFjup3UpJBMeOIDk7QVv4eHQ5WqImjAM8568ruydXEjkh45Vv4ZNORK0FEIDZQoiDP9EVqSW2i4sSdP5JF9gYfjUj4cRdCweoiGHDopsUUScPaoVL0ioVrIh6MIGi3i4hliNW8LuTiTWhWa011BL1fpSyqCBkyi8VuRhhJasKTwSi3H6hs6HEpf0vFoDMRZFXN9lwS59DP+C1RVptTtVggNZP8kGorYccPWPAlxj6VK0lVHpCG46p6sbtkwFTiwIOjlyn1JR6NhiKlc2YQH86RarEFsJ/Zy5bRbOTQUdcuX6TzUdvovz4iGlCAphYYly5RcyumR0Ml4hDTEBEkpNJTMvpz+oYM1Xm5H0FWl0JjIU/G6OA0tQGEv1zQFqSqFhtJfITu/0+++OtLHh0NIkJShcFuKpZYjqvffqD8CvVzHTA9HGeavoegpOb69OluR78BcrpggOaIzkuyG0l/Bh+IsD5enJLPif/8HGvJUqkpwDVtKLdyVjsa1OaKHY4UTC2narRBHHccbMQ01VHfFozH96Iw+U6n6G7uHiVQVEjah4kAaNil7JR+Nh44zeiQ0/BfIwkmCjuMHsSpJORE3X5ijv6jGhblcIUFy/JQCkameOPZqMRq9vhAe/Ee2VBWS4EH9LElL0okyjzvxBDyH+Ey3A3u5SSh7vHRbFOC11HY2Ph4KOA/xjoz2z7Ehj6WqCBqo94DHptoiNU4uwg8Bht9/hTTiKzZF0FjCVq9IH81+rZ8Je7mJriqAhoW6IPlt9JSEE4fBP8c0orRbEfUNmMKtR9Po29my8YSd9eg6YAE0bFg0m2Q8PIgG6lhIEiQF0CCVry2N6GjAwuAhYJ+Rs26anaJo4IsMlv7hQfC/v2ILOC+GBqyLs6jhkOY2D4amfLZLkORPA98AiKwG+tyhNGCTWJQgyZ0GbEmNg4097WyZ0DSJ7fqS8qbRgnYh9gvtXz4aoZeL+2C2UpU3DXzFJ27gaega6w8B06jc8DJEzjS8MWw6jkMmfUf6AdB4uU5YIsiXRqsN15k0jNDqveoVJgA0sJe7TZDkSgMW/YQw1b5TnwxSvJNxT6e516jcq3xp2Jr+76QkRlxfNrMT/PF8KuIL3Q+dl7vp5kfD8npMd78n2gzSkc6F8kz3UizGjEaPdDtW51CozMX8jTSaXnhf1vPs2bLNdcc3tuDUhIs/w1xe2uj0HdiOjUZXvY0GH9S3GN6GVxY1LPg4no5EhVzoFVvLVzVGr58ojSfUtB6gM30TjUDRbNv1M+9wpNebiAkXbtRNL5UC3wgcDl/j5ZrXb6NxAFiSoaWdhEJ55lotU17QpFvo5UIWzk3RNIRa8YzIVDOtXN6o139Gr090tnssVc6H/xVLQ7xpRsIpsTyzIUXjCyCpOi+38/9iabD0YhPNJbL0aMzJXSzzgmakg8OBpWp0hsL/3GiwnlDwJm6hmz78SCv4I1qu0Xq5F4XSkC4pkyicG8mzrqqnQpze07X52MstkgZ322LKnzRLs3YqU+BKmfl6DgzgNyhUBdJgxlL0uCzVLRTKM9Mb1BViIsuBVW5hNLg7ljtWT0jbWqqKux8QjdEPZFShl1sUDTboKZOQ4ULbzhxuxugrOBwMXoUohAZnd/WGenmLZESFVtA1VbchjWdwOBhsEsubxu5PjdTpBKT7XLhgQ/ypGF+oyjVW6HDkRGMbhDLmMmNc76M/MkITJkLbztzBGP0An3w6u6BvBjQID66h4fIMGINhvbc8aXiephzIlAHC0VhvOhiP9/RD7BN68wdYkgv/kI7d0GNbtsv620gWHZN+ZNrVAX4MvQjmb6jHs0KFChUqVKhQoUKFChUqVKhQoUKFChUqVKhQoUKFChUqVKhQ4Xj4F/8v99oipIHOAAAAAElFTkSuQmCC"
+                } );
+          
+
+          
+          },
+        },
+      ],
+    });
+  });
+
+</script>
+
+</body>
+</html>

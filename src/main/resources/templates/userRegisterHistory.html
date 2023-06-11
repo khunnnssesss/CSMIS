@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/userRole/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/userRole/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <!-- <link th:href="@{/userRole/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" /> -->
+    <link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<style>
+
+
+.curweek{
+          background-color: blueviolet ;
+        }
+
+        .nextweek{
+          background-color: greenyellow;
+        }
+
+        .weekends{
+          background-color: gainsboro;
+        }
+
+        .holidays{
+            background-color: #ff5599;
+        }
+          .incurweek{
+            background-color: blueviolet;
+          }
+        
+
+        .pastdays{
+          background-color: #ffffbb;
+        }
+
+        .registerDate{
+          background-color: aqua;
+        }
+
+
+        .rebox{
+          background-color: greenyellow;
+          color: red!important;
+        }
+
+        .rnebox{
+          background-color: yellow;
+        }
+
+        .uebox{
+          background-color: red;
+        }
+
+        @media (max-width: 576px){
+#calendar2{
+  min-height: 385px;
+}
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeInleft 1s forwards;
+}
+
+@keyframes fadeInleft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+</style>
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{/userRole/css/style.css}" rel="stylesheet">
+</head>
+<head th:replace="~{userFragments :: html_userhead}"/>
+
+<body>
+    <div class="container-fluid bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+      	<!-- Navbar & Hero Start -->
+		<div class="container-fluid  p-0 navFixed">
+			<div th:replace="~{userFragments :: user_sidebar}"></div>
+      <div id="liveAlertPlaceholder" class="position-absolute z-3 w-100"></div>
+		</div>
+		
+		<!-- Button trigger modal -->
+
+    	<!-- Modal 2-->
+ 
+		<div th:replace="~{userFragments :: profile_sidebar}"></div>
+		
+			<!-- Modal 2 End -->
+
+  
+    <div class="container mt-md-5">
+
+             <!-- show data calendar  -->
+             <div class="row g-0 d-flex flex-row">
+
+              <!-- history calendar -->
+              <div id="calendar" class="col-12 col-lg-6 p-2 fadeInLeft d-none d-md-block animated order-md-2"></div>
+
+                
+                <div id="pricelist" class="col-12 col-lg-6 p-2 d-flex flex-column fadeInRight animated order-md-1"> <!-- history category -->
+                  <div class="">
+                    <h1 class="text-center">Registration History in  <span class="curMonth"></span></h1>
+                  </div>
+                
+                <div class="row d-flex justify-content-between d-md-none">
+                  <button type="button" class="btn btn-primary col-6 py-2 btnPrev">Previous Month</button>
+                  <button type="button" class="btn btn-primary col-5 py-2 btnNext">Next Month</button>
+                </div>
+                  <div class="registerType "> <!-- history Card Start -->
+                    <div class="card mt-2">
+                      <div class="card-header">
+                        Staff Id : <span id="card-staffid"></span>
+                      </div>
+                      <div class="card-body">
+                        
+
+                     
+
+
+                        <!-- Mobile check box -->
+                        <div class="card-text d-flex justify-content-around">
+                          <div class="form-check form-switch" id="checkRegisterEat">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRegisterEat">
+                            <label class="form-check-label" for="flexSwitchCheckRegisterEat">Register Eat</label>
+                            </div>
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRegisterNoEat">
+                            <label class="form-check-label" for="flexSwitchCheckRegisterNoEat">Register No Eat</label>
+                            </div>
+                            <div class="form-check form-switch ">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckUnRegisterEat">
+                            <label class="form-check-label" for="flexSwitchCheckUnRegisterEat">Unregister Eat</label>
+                            </div>
+                          </div>
+
+                      </div>
+                      </div>
+                    
+                  </div> <!-- history Card End -->
+                  
+                  
+                 
+                  <div class="totalch">   <!-- total price in MONTH Start -->
+                   
+                    <div class="card w-100 " style="width: 18rem;">   <!-- card Month Start -->
+                      <ul class="list-group list-group-flush p-3">
+                        <li class="list-group-item p-3 ">
+                        <span>Register Days</span>
+                        <span class="float-end" id="registerdays"></span>
+                        </li>
+                        <li class="list-group-item p-3">
+                        <span>Register and Eat</span>
+                        <span class="float-end" id="registerandeatdays"></span>
+                        </li>
+                        <li class="list-group-item p-3">
+                        <span>Register and No Eat</span>
+                        <span class="float-end" id="registerandnoeatdays"></span>
+                        </li>
+                        <li class="list-group-item p-3">
+                        <span>Unregister and Eat</span>
+                        <span class="float-end" id="unregisterandeatdays"></span>
+                        </li>
+                      </ul>
+                      <div class="card-footer text-dark text-100">
+                        <span>Total Spent in <span class="curMonth"></span></span>
+                        <span class="float-end" id="totalprice"></span>
+                      </div>
+                      <div class="card-footer text-center d-block d-md-none">
+                       
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testmodal">
+                          view registered history details
+                        </button>
+                        
+  
+</div>
+                      </div> <!-- card Month End -->
+
+                  </div>   <!-- total price in MONTH End -->
+
+                  
+
+
+            </div>  <!-- history category end -->
+           
+
+
+              <!-- show data calendat end -->
+              </div>
+    </div>
+
+    <div id="testmodal" class="modal fade">   <!-- Modal -->
+      <div class="modal-dialog modal-dialog-centered">
+        <div  class="modal-content">
+  
+          <div class="modal-body">
+              <div id="calendar2"></div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div> 
+    </div> <!-- End Modal -->
+
+
+
+        <!-- Footer Start -->
+      
+        <footer class="w-100 wow fadeIn bg-primary mt-5" data-wow-delay="0.1s">
+          <div class="container text-center text-light py-3">
+              <p class="">@Copyright All Right Reserved!</p>
+              </div>
+            </footer>
+
+            <!-- <div class="container-fluid  footer p-0 m-0 wow fadeIn"
+			data-wow-delay="0.1s">
+			<div class="bg-primary text-light py-3">
+				<p class="text-center">@Copyright All Right Reserved!</p>
+			</div>
+		</div> -->
+
+
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <!-- <a href="#" class="btn btn-lg btn-warning btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div> -->
+
+    <!-- JavaScript Libraries -->
+  <div th:replace="~{userFragments :: fo}"></div>
+
+
+    <!-- Template Javascript -->
+    <script th:src="@{/userRole/js/main.js}"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js'></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type='module' th:src="@{/userRole/js/userComponents/historycal.js}"></script>
+    <script>
+      var userId = '[[${userId}]]'
+      var registeruser = '[[${registered}]]'
+      var userstaffId = '[[${userDoorlog}]]'
+console.log('user id ;;:: ',userId);
+
+      if(registeruser != 'false'){
+        document.querySelector('#showUnRegistereduser').style.display = 'none'
+        document.querySelector('#showContentRegsitereduser').style.display = 'block'
+      }else{
+        document.querySelector('#showContentRegsitereduser').style.display = 'none'
+        document.querySelector('#showUnRegistereduser').style.display = 'block'
+      }
+      console.log('registered user :: ',registeruser);
+
+      function validate() {
+				var password1 = document.getElementById("password1").value;
+				var password2 = document.getElementById("password2").value;
+        
+				if (password1 == password2) {
+          console.log('tete :: ',  password1,password2);
+					$(".error-msg").html(`Pass!  ${password1}  ${password2}`).show();
+					return false;
+				} else {
+					$(".error-msg").html("").hide();
+					return true;
+				}
+			}
+    </script>
+   
+</body>
+
+</html>

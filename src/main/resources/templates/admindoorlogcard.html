@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" 
+     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+     <link rel="stylesheet" th:href="@{/dashboard/doorlog/style.css}">
+     <link rel="stylesheet" th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+    <section class="container-fluid">
+        <div class="row">
+            <!-- sidebar start -->
+            
+           <div th:replace="~{fragments :: html_sidebar}" ></div>
+          
+            <!-- sidebar end -->
+            <div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+                <!-- header start -->
+               <div th:replace="~{fragments :: html_header}"></div>
+                <!-- header end -->
+                <!-- content start -->
+                <div class="row">
+                   
+                     <!-- Modal -->
+
+  <!-- Modal 2-->
+  <!-- Modal -->
+<div class="modal fade mt-5" id="profileSetupModal" tabindex="-1" role="dialog" aria-labelledby="profileSetupModalLable" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="feather-user text-primary"></i>Profile Setup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                 <div class="col-5">
+                     <div class="mb-3"><img
+       src="img/user/avatar1.jpg"
+       class="img-thumbnail"
+       style="width:150px;"
+     /></div>
+                 <label for="formFileMultiple" class="form-label">Profile Upload</label>
+     <input class="form-control" type="file" id="formFileMultiple" multiple />
+                </div>
+                <div class="col-7">
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Employee ID</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Name</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Email</label>
+     <input class="form-control" type="email" id="formFileMultiple" />
+                 </div>
+     
+                </div>
+                </div>
+                 </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+                </div>
+                <div class="row ">
+                   
+                               
+                                </div>
+                                <div class="row ">
+                              
+                                
+                                    <div class="col-12">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                              <div class="d-flex justify-content-between align-items-center">
+                                               <h4 class="mb-0">
+                                                   <i class="feather-codepen text-primary"></i>
+                                                  Employee Access For CSMIS 
+                                               </h4> 
+                                               <button class="btn btn-outline-primary btn-sm full-page-btn"><i class="feather-maximize-2 h4"></i></button>  
+                                              </div> 
+                                              <hr> 
+                                              
+                                           <div class="container py-5">
+      
+        <div class="row row-cols-4 g-4 px-5">
+           
+
+          <!-- Register Eat -->
+            <div class="col">
+                <div class="card">
+   
+   							 <form action="/admin/re1" method ="get">
+  							 
+        
+  							 <div class="card-body">
+  							 <div class="color-box">
+  							 <h4 class="card-title">Register <br>And Eat</h4>
+  							 </div>
+  
+  	           <label for="date1"><br><b>Select Date:</b></label>
+            <input type="text" id="date1" th:name="redate" th:value="${date}" 
+            class="form-control" onchange="updateTotalCount(1)" th:onchange="updateTotalCount(1)" placeholder="      Select Date">
+            <br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="submitBtn" name="submitBtn" >Submit</button>
+                </div>
+				 <hr> 
+				<div id="show-box" class="form-control">
+                <div th:if="${reCount != null}" class="text-center">
+   				 <p><b>RE Count: </b><b><span th:text="${reCount}"></b></span></p>
+				</div>
+            </div>
+        </div>
+        </form>
+          <div class="mb-5 d-flex justify-content-around">
+            <a th:href="@{'/admin/re?selectedDate=' + ${date}}" class="btn btn-primary">See Details</a>
+        </div>
+	</div>
+</div>
+          <!-- Register Eat -->
+
+			
+			
+			<!-- Register No Eat -->
+			<div class="col">
+                <div class="card">
+   
+    			<form action="/admin/rne1" method ="get">
+        
+        	<div class="card-body">
+  							 <div class="color-box">
+  							 <h4 class="card-title">Register <br>And No Eat</h4>
+  							 </div>
+  
+  	           <label for="date1"><br><b>Select Date:</b></label>
+            <input type="text" id="date2" th:name="rnedate" th:value="${rnedate}" class="form-control" placeholder="      Select Date" onchange="updateTotalCount(2)" th:onchange="updateTotalCount(2)">
+            <br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="submitBtn" name="submitBtn" >Submit</button>
+				 </div>
+				 <hr>
+				<div id="show-box" class="form-control">
+                <div th:if="${rneCount != null}" class="text-center">
+   				 <p><b>RNE Count:</b><b> <span th:text="${rneCount}"></span></b></p>
+				</div>
+            </div>
+        </div>
+        </form>
+        <div class="mb-5 d-flex justify-content-around">
+            <a th:href="@{'/admin/rne?selectedDate=' + ${rnedate}}" class="btn btn-primary">See Details</a>
+        </div>
+	</div>
+</div>
+			<!-- Register No Eat -->
+						
+
+			<!-- UnRegister Eat -->
+			<div class="col">
+                <div class="card">
+   
+    <form action="/admin/ue1" method ="get">
+        
+        <div class="card-body">
+  							 <div class="color-box">
+  							 <h4 class="card-title">UnRegister <br>And Eat</h4>
+  							 </div>
+  
+  	           <label for="date1"><br><b>Select Date:</b></label>
+            <input type="text" id="date3" th:name="uedate" th:value="${uedate}" placeholder="      Select Date" class="form-control" onchange="updateTotalCount(3)" th:onchange="updateTotalCount(3)">
+            <br>
+            	 <div class="text-center">
+            	
+                <button type="submit" class="btn btn-primary" id="submitBtn" name="submitBtn" >Submit</button>
+				 </div>
+				 <hr>
+				<div id="show-box" class="form-control">
+                <div th:if="${ueCount != null}" class="text-center">
+   				 <p><b>UE Count: </b><b><span th:text="${ueCount}"></span></b></p>
+				</div>
+            </div>
+        </div>
+        
+        </form>
+        <div class="mb-5 d-flex justify-content-around">
+            <a th:href="@{'/admin/ue?selectedDate=' + ${uedate}}" class="btn btn-primary">See Details</a>
+        </div>
+	</div>
+</div>
+			<!-- UnRegister Eat -->
+			
+
+			<!-- Total Register and UnRegister Eat -->
+            <div class="col">
+                <div class="card">
+                 <form action="/admin/replusue1" method ="get">
+                    
+                    <div class="card-body">
+  							 <div class="color-box">
+  							 <h4 class="card-title">Total <br>Access List</h4>
+  							 </div>
+  
+  	           <label for="date1"><br><b>Select Date:</b></label>
+                        <input type="text" id="date4" class="form-control" th:value="${totaldate}" placeholder="      Select Date" name="totaldate" onchange="updateTotalCount(4)" th:onchange="updateTotalCount(4)">
+                        <br>
+                       <div class="text-center">
+                         <button type="submit" class="btn btn-primary" id="submitBtn" name="submitBtn" >Submit</button>
+				 </div>
+				 <hr>
+				<div id="show-box" class="form-control">
+                <div th:if="${totalCount != null}" class="text-center">
+   				 <p><b>Total Count: </b><b><span th:text="${totalCount}"></span></b></p>
+				</div>
+                    </div>
+                    </div>
+                    </form>
+                    <div class="mb-5 d-flex justify-content-around">
+                        <a th:href="@{'/admin/replusue?selectedDate=' + ${totaldate}}" class="btn btn-primary">See Details</a>
+                    </div>
+                    
+                </div>
+            </div>
+			<!-- Total Register and UnRegister Eat -->
+            
+
+            </div>
+               </div>
+                                              
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                
+                       
+                    </div>
+                  
+            </div>
+        
+    </section>
+
+
+<div th:replace="~{fragments :: html_script}"/></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script th:inline="javascript">
+	var backendDates = '[[${dateOfArray}]]';
+
+  
+
+$(document).ready(function() {
+  $("#date1").datepicker({
+    beforeShowDay: function(date) {
+      var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+      var isBackendDate = backendDates.includes(dateString);
+      return [isBackendDate];
+    },
+    dateFormat: 'yy-mm-dd'
+  });
+});
+$(document).ready(function() {
+	  $("#date2").datepicker({
+	    beforeShowDay: function(date) {
+	      var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+	      var isBackendDate = backendDates.includes(dateString);
+	      return [isBackendDate];
+	    },
+          dateFormat: 'yy-mm-dd'
+
+	  });
+	});
+$(document).ready(function() {
+	  $("#date3").datepicker({
+	    beforeShowDay: function(date) {
+	      var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+	      var isBackendDate = backendDates.includes(dateString);
+	      return [isBackendDate];
+	    },
+          dateFormat: 'yy-mm-dd'
+
+	  });
+	});
+$(document).ready(function() {
+	  $("#date4").datepicker({
+	    beforeShowDay: function(date) {
+	      var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+	      var isBackendDate = backendDates.includes(dateString);
+	      return [isBackendDate];
+	    },
+          dateFormat: 'yy-mm-dd'
+
+	  });
+	});
+
+
+
+
+    $('table').ready(function() {
+    $('#example').DataTable();
+} );
+
+
+// Date null alert box
+
+var dateEmpty = /*[[${dateEmpty}]]*/null;
+
+if(dateEmpty){
+  console.log(dateEmpty);
+
+  Swal.fire({
+    text: dateEmpty,
+    icon: 'warning',
+    confirmButtonColor: '#d33',
+    confirmButtonText: 'OK'
+  })
+}
+</script>
+
+</body>
+</html>

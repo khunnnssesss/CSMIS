@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  --primary-soft: #f3f3f3;
+  --primary: #007bff;
+}
+/* .nav-menu{
+   
+} */
+
+.nav-menu ul {
+  margin: 0;
+  padding: 0;
+}
+.select-width{
+    width: 150px;
+}
+.order-table tr td{
+    vertical-align: middle;
+}
+.nav-menu ul {
+  list-style-type: none;
+}
+/* sidebar */
+#sidebar {
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#sidebar ul li a {
+  text-decoration: none;
+}
+.drop-menu {
+  margin-left: 10px;
+}
+
+#sidebar ul li > ul li:hover {
+  color: #868181;
+}
+#sidebar ul li > ul {
+  background-color: #f3f3f3;
+}
+#sidebar ul li > ul li {
+  padding: 10px 10px 10px 30px;
+}
+#sidebar ul li a[aria-expanded="true"] {
+    background-color: #f3f3f3;
+    color: blue !important;
+}
+#sidebar ul li > ul li:hover {
+  color: #ffff;
+  background-color: #e2dfdf;
+  
+}
+
+#sidebar ul li.active > a {
+  background: transparent;
+  color: #80858a;
+}
+/*  */
+
+.menu-title {
+  padding: 10px 0;
+  font-weight: bold;
+  color: #575151;
+  font-size: 20px;
+}
+
+/* .menu-item {
+    
+} */
+.menu-item-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  transition: 0.3s;
+  color: black;
+}
+.menu-item-link.active {
+  background-color: var(--primary);
+  border-radius: 0.25rem;
+  color: white !important;
+}
+.menu-item-link:hover {
+  background: #b1aeae;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: black;
+}
+/* datatable  */
+#example_filter {
+  float: right;
+}
+#example_paginate {
+  float: right;
+}
+/* datatable  */
+.img-logo {
+  width: 80px;
+ 
+}
+.active {
+  color: blue;
+}
+label.error {
+  font-weight: 700;
+  display: block;
+  color: #f00;
+}
+.menu-spacer {
+  padding: 15px 0;
+}
+.content {
+  background: var(--primary-soft);
+  overflow: scroll;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) inset;
+}
+.header {
+  position: sticky;
+  top: 0px;
+  z-index: 2000;
+}
+.user-img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.sidebar-show {
+  cursor: pointer;
+}
+.sidebar {
+  overflow: scroll;
+}
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.brand-nav {
+  position: sticky;
+  top: 10px;
+  background: white;
+}
+/* .open{
+    
+    
+    
+} */
+.card {
+  border: none;
+}
+.status-card {
+  transition: 0.5s;
+}
+.status-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 3px rgba(243, 240, 240, 0.5);
+}
+.status-card:active {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 3px rgba(243, 240, 240, 0.5);
+}
+.ov-img {
+  margin-left: -25px;
+}
+.item-carousel {
+  margin-top: -100px;
+}
+.card-item-img {
+  overflow: visible;
+  height: 200px;
+}
+.sub-list tr {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.sub-list tr:active {
+  transform: scale(1.02);
+}
+.full-page-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2005;
+}
+.form-date {
+  display: flex;
+}
+.search {
+  height: 30px;
+  margin-top: 31px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    position: fixed;
+    width: 300px;
+    z-index: 2001;
+    background: white;
+    display: block !important;
+    margin-left: -100%;
+  }
+  .card-carousel {
+    margin-top: 100px;
+  }
+  .meat-height{
+  height:200px;
+  
+  margin-top:10px;}
+  .card-height{
+  height:800px !important;}
+  .holiday-card{
+  margin-top:100px;}
+  .order1-margin{
+  margin-top:100px;}
+ .startWidth{
+ display:inline-grid;
+ }
+ .startValue{
+ width:130px;}
+  .endWidth{
+ display:inline-grid;
+ }
+ .endValue{
+ width:130px;}
+ .statusWidth{
+ display:inline-grid;
+  margin-top:10px!important;
+ }
+ .statusValue{
+ width:120px;
+
+ }
+ .reportWidth{
+  margin-top:10px!important;
+ }
+ .table-responsive{
+ display: block;
+    width: 300%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+ }
+ #example_filter label{
+ margin-right: 37px !important;
+ }
+ #example_paginate{
+ width:380px !important;}
+ .dataTables_length label{
+ margin-left:55px;}
+}

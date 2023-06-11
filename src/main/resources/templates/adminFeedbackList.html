@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+     <style>
+    .dataTables_length{
+    width:200px;}
+    .dataTables_length label{
+    display:flex;
+    }
+    #example_filter label{
+    display:flex;}
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+    <section class="container-fluid">
+        <div class="row">
+            <!-- sidebar start -->
+            <div th:replace="~{fragments :: html_sidebar}"></div>
+            <!-- sidebar end -->
+            <div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+              <!-- header start -->
+             <div th:replace="~{fragments :: html_header}"></div>
+                <!-- header end -->
+                <!-- content start -->
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body ">
+                              <div class="d-flex justify-content-between align-items-center">
+                               <h4 class="mb-0">
+                                   <i class="feather-codepen text-primary"></i>
+                                   Feedback Data List
+                               </h4> 
+                               <button class="btn btn-outline-primary btn-sm full-page-btn"><i class="feather-maximize-2 h4"></i></button>  
+                              
+                              </div> 
+                              <hr> 
+                              
+                              
+                              
+                              <table id="example" class="table table-striped " style="width:100%">
+                                                          
+                                                <thead class="bg-primary text-white
+                                                ">
+                                              
+                                                    <tr>
+                                                        <th class="text-center">Sr. No</th>
+														<th class="text-center">Created_at</th>
+                                                        <th>Feedback</th>
+                                                        
+                                                        <th hidden></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+		                                              <tr class="mytr" th:each="feedback,index:${list}" th:with="rowIndex=${index.index+1}">
+		                                              
+		                                                <td class="text-center" th:text="${rowIndex}">
+		                                               
+		                                                </td>
+														<td class="text-center" th:text="${feedback.created_at}"></td>
+		                                                <td th:text="${feedback.feedback}"></td>
+		                                                <!-- <td class="text-center"> <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModalLong"><i class="fa-regular fa-trash-can"></i></button></td> -->
+		                                              
+		                                              <td class="myid" th:text="${feedback.id}" hidden></td>
+		                                            </tr>
+                                                </tbody>
+                                                
+                                            </table>
+                                          
+                              
+                              
+                              
+                         	</div>
+						</div>    
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+
+
+<div th:replace="~{fragments :: html_script}" /></div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$('table').ready(function() {
+    $('#example').DataTable();
+    
+} );
+
+$('.mybtn').click(function(){
+	 var userid = $(this).closest('.mytr').find('.myid').text();
+	 
+	  console.log(userid)
+	Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			 	fetch('/admin/deleteFeedback/'+userid) .then(resp=>{
+			 		if(resp.ok){
+			 			Swal.fire(
+			 				      'Deleted!',
+			 				      'Your file has been deleted.',
+			 				      'success'
+			 				    )
+			 				   setTimeout(function() {
+									location.reload();
+								}, 3000); 
+			 				  
+			 		}
+			 		 
+			 	})
+			 	
+		  }
+		}) 
+	
+})
+/* var mybtn = document.querySelector('.mybtn')
+	mybtn.addEventListener('click',function(){
+console.log("dkfjdk")
+		console.log(this.closest('.myRow')) */
+	/*Swal.fire({
+	  title: 'Are you sure?',
+	  text: "You won't be able to revert this!",
+	  icon: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Yes, delete it!'
+	}).then((result) => {
+	  if (result.isConfirmed) {
+	    Swal.fire(
+	      'Deleted!',
+	      'Your file has been deleted.',
+	      'success'
+	    )
+	  }
+	})*/
+/* }) */
+
+</script>
+
+
+</body>
+</html>

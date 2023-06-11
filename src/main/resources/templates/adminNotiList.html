@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+     <style>
+    .dataTables_length{
+    width:200px;}
+    .dataTables_length label{
+    display:flex;
+    }
+    #example_filter label{
+    display:flex;}
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+    <section class="container-fluid">
+        <div class="row">
+            <!-- sidebar start -->
+            
+           <div th:replace="~{fragments :: html_sidebar}" ></div>
+          
+            <!-- sidebar end -->
+            <div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+                <!-- header start -->
+               <div th:replace="~{fragments :: html_header}"></div>
+                <!-- header end -->
+                <!-- content start -->
+                <div class="row">
+                    
+ 
+  
+  
+                </div>
+                
+                                <div class="row ">
+                                    <div class="col-12">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                              <div class="d-flex justify-content-between align-items-center">
+                                               <h4 class="mb-0">
+                                                   <i class="feather-codepen text-primary"></i>
+                                                   Noti List
+                                               </h4> 
+                                               <button class="btn btn-outline-primary btn-sm full-page-btn"><i class="feather-maximize-2 h4"></i></button>  
+                                              </div> 
+                                              <hr> 
+                                              <table id="example" class="table table-striped " style="width:100%">
+                                                          
+                                                <thead class="bg-primary text-white">
+                                              
+                                                    <tr >
+                                                        <th>Sr. No</th>
+                                                        <th>Photo</th>
+                                                        <th>Staff ID</th>
+                                                        <th>DoorLog</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                        <th>Team</th>
+                                                        <!-- <th>Action</th>                                                 -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr  th:each="ml, index : ${mailList}" th:with="rowIndex=${index.index+1}">
+                                                        <td th:text="${rowIndex}"></td>
+                                                        <td><img th:src="@{/images/__${ml.photo}__}" style="width:50px;height:50px;"></td>
+                                                        <td th:text="${ml.staffId}"></td>
+                                                        <td th:text="${ml.doorLog}"></td>
+                                                        <td th:text="${ml.name}"></td>
+                                                        <td th:text="${ml.email}"></td>
+                                                        <td th:text="${ml.role}"></td>
+                                                        <td th:text="${ml.team}"></td>
+                                                       
+                                                        <!-- <td> -->
+                                                        <!-- <span class="d-flex">   -->
+                                                          <!-- <a class="btn btn-outline-danger btn-sm" th:href="@{/admin/deleteMail(id=${ml.id})}"><i class="feather-trash-2 "></i></a> -->
+                                                          <!-- </span>s -->
+                                                      <!-- </td> -->
+                                                       
+                                                    </tr>
+                                                </tbody>
+                                                
+                                            </table>    
+                                              
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                       
+                    </div>
+                  
+            </div>
+        </div>
+    </section>
+
+
+<div th:replace="~{fragments :: html_script}"/></div>
+<script>
+     $('table').ready(function() {
+    $('#example').DataTable();
+    
+} );
+    
+    
+    
+ 
+     function validate() {
+    	    var password1 = document.getElementById("password1").value;
+    	    var password2 = document.getElementById('password2').value;
+    	    if(password1 != password2) {
+    	        $(".error-msg").html("Password do not match!").show(); 
+    	        return false;
+    	    }
+    	    else {
+    	        $(".error-msg").html("").hide(); 
+    	        return true;
+    	    }
+    	}
+
+</script>
+
+</body>
+</html>

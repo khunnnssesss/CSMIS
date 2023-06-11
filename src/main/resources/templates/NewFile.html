@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap}" rel="stylesheet">
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js}" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{userRole/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{userRole/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{userRole/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link
+    th:href="@{https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css}"
+    rel="stylesheet"
+  />
+  <!-- MDB -->
+  
+    <link th:href="@{https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <style>
+        .slow  .switch-group { transition: left 0.7s; -webkit-transition: left 0.7s; }
+        .fast  .switch-group { transition: left 0.1s; -webkit-transition: left 0.1s; }
+        .quick .switch-group { transition: none;      -webkit-transition: none; }
+        .box{
+          background-color: red;
+        }
+      </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div> -->
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl navFixed p-0">
+          <nav class="navbar navbar-expand-lg navbar-light bg-primary px-4 px-lg-5 py-0 py-lg-0 margin-bar">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-white m-0"><!--<i class="fa fa-utensils me-3"></i>CSMIS</h1>
+                 <img src="img/logo.png" alt="Logo"> -->
+                 <img src="userRole/img/images.png" class="logo-img"></i>CSMIS</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav index-nav ms-auto  p-0">
+                    <a href="index.html" class="nav-item nav-link text-white">Home</a>
+                    <a href="register.html" class="nav-item nav-link text-white">Register</a>
+                   
+                    <a href="feedback.html" class="nav-item nav-link text-white">Feedback</a>
+                    
+                    <a href="logout.html" class="nav-item nav-link text-white">Logout</a>
+                    <div class="nav-item dropdown ">
+                        <a href="aa.html" class="nav-link dropdown-toggle pb-2 text-white" data-bs-toggle="dropdown"><img src="userRole/img/team-1.jpg" id="profile">Hnin Theint</a>
+                        <div class="dropdown-menu m-0 p-0">
+                            <a href="aa.html" class="dropdown-item m-0 p-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-key me-2 text-primary"></i>Change Password</a>
+                            <a href="aa.html" class="dropdown-item m-0 p-3" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fas fa-user me-2 text-primary"></i>Profile Setup</a>
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+               
+            </div>
+        </nav>
+
+        
+      </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl pb-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-5">
+                        <div class="row g-3 rowMargin">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="userRole/img/shutterstock_213783265-1.jpg">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="userRole/img/comphan.JPG" style="margin-top: 25%;">
+                            </div>
+                            <!-- <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-5 mb-5">
+                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">Register Us</h5>
+                        <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i> DAT <i class="fa fa-utensils text-primary me-2"></i></h1>
+                        <form>
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Employee Id</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter employee ID">
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Email Noti</label>
+                                      </div>
+                                    </div>
+                            </div>
+                              <div class="mb-3">
+                                <div id="calendar"></div>
+
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input meat" type="checkbox" id="inlineCheckbox1" value="Chicken">
+                                <label class="form-check-label" for="inlineCheckbox1">Chicken</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input meat" type="checkbox" id="inlineCheckbox2" value="Pot">
+                                <label class="form-check-label" for="inlineCheckbox2">Pot</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input meat" type="checkbox" id="inlineCheckbox3" value="Beaf" >
+                                <label class="form-check-label" for="inlineCheckbox3">Beaf</label>
+                              </div>
+                              
+                                <p>If you want to avoid some meat.</p><p>You can choose by clicking the button down below.</p> 
+                                <div class="float-center mt-3">
+                                <button class="btn btn-primary" id="submit">Avoid Meat</button>
+                             </div>
+                             <div class="float-end mt-4">
+                                <button class="btn btn-primary" id="submit" formaction="/saveData">Register</button>
+                             
+                             </div>
+                        </form>
+                        <button class="btn btn-primary" id="send">Send</button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+
+       
+        
+
+        <!-- Footer Start -->
+        <div class="container-fluid  footer p-0 m-0 wow fadeIn mt-5" data-wow-delay="0.1s">
+          <div class="bg-primary text-light py-3">
+              <p class="text-center">@Copyright All Right Reserved!</p>
+              </div>
+      </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-warning btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/userRole/lib/wow/wow.min.js}"></script>
+    <script th:src="@{/userRole/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/userRole/lib/waypoints/waypoints.min.js}"></script>
+    <script th:src="@{/userRole/lib/counterup/counterup.min.js}"></script>
+    <script th:src="@{/userRole/lib/owlcarousel/owl.carousel.min.js}"></script>
+   
+    <script th:src="@{/userRole/lib/tempusdominus/js/moment-timezone.min.js}"></script>
+    <script th:src="@{/userRole/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js}"></script>
+  <script th:src="@{https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js}"></script>
+  <script
+    type="text/javascript"
+    th:src="@{https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js}"
+  ></script>
+  
+
+    <!-- Template Javascript -->
+    <script th:src="@{/userRole/js/main.js}"></script>
+   
+    <script>
+
+      var dateList=[];
+     
+      var avoidList = [];
+      
+      var empId=null;
+      var empIn = document.getElementById("exampleFormControlInput1")
+      var emailNoti = false;
+      var empNoti = document.getElementById("flexSwitchCheckDefault")
+
+      var datas = document.querySelectorAll(".meat")
+// var mydada =null;
+      document.getElementById("send").addEventListener("click",()=>{
+        dateList = dateList.map(w=> w ={date: w})
+        avoidList = avoidList.map(w=> w={avoid: w})
+// mydada=[empId,emailNoti,avList,dteList];
+var mydata ={
+  empId,
+  emailNoti,
+  avoidList,
+  dateList
+}
+console.log(mydata);
+console.log(JSON.stringify(mydata));
+        fetch("/myDaDa",{
+          method: "POST",
+            body:  JSON.stringify(mydata),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+      })
+
+      
+for(var chec of datas){
+    chec.addEventListener('click',function () {
+        if(this.checked) {
+
+          avoidList.push(this.value)
+        }
+        else{
+          var myin = avoidList.indexOf(this.value);
+              avoidList.splice(myin,myin+1);
+        }
+        console.log(avoidList);
+      })
+}
+
+      empIn.addEventListener("input",()=>{
+        empId=empIn.value;
+        console.log(empId);
+      });
+
+      empNoti.addEventListener("click",(e)=>{
+        emailNoti = e.target.checked;
+        console.log(emailNoti);
+      });
+        document.addEventListener('DOMContentLoaded', function () {
+      console.log("calendar");
+          const calendarEl = document.getElementById('calendar');
+
+
+          var cal = new FullCalendar.Calendar(document.getElementById("calendar"), {
+         selectable: true,
+         headerToolbar:{
+            left: "timeGridWeek",
+            center: "title",
+            right: "prev,next,today"
+         },
+         dateClick: function(info) {
+           
+           
+            if(dateList.includes(info.dateStr)) {
+                info.dayEl.classList.remove("box")
+                var myin = dateList.indexOf(info.dateStr);
+                dateList.splice(myin,myin+1);
+              
+             }
+             else {
+                info.dayEl.classList.add("box")
+                dateList.push(info.dateStr)
+             }
+            
+  }
+        });
+
+          cal.render();
+
+          const button = document.getElementById('submit')
+          button.addEventListener('click', () => {
+            var eventData = calendar.getEvents().map(i => i.startStr);
+            $.ajax({
+              type: "POST",
+              url: "/api/doRegister",
+              contentType: "json",
+              data: JSON.stringify({ date: '2022-03-01' }),
+              success: function (result) {
+              }
+            });
+          });
+          console.log(moment().format('MMMM Do YYYY, h:mm:ss a'))
+
+        }
+    )
+    
+      </script>
+    
+     
+    
+    
+</body>
+
+</html>

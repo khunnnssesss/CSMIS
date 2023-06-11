@@ -1,0 +1,19 @@
+
+/*import.html*/
+.card-3{
+    margin-top: -50px;
+  }
+  .btn-change:hover{
+-webkit-transform: scale(1.1);
+transition: 0.5s;
+background: #3d5af1;
+border:1px solid #3d5af1;
+}
+#imgLogo{
+ width: 60px;
+ height: 60px;
+ border-radius: 50%;
+}
+.font-text{
+  font-size: 30px;
+}

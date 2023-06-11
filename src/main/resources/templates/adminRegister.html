@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/dashboard/css/app.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/vendor/feather-icons-web/feather.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard/css/myStyle.css}">
+    <style>
+
+#calendar{
+  height: 600px;
+}
+
+.curweek{
+  background-color: burlywood;
+  opacity: .4;
+        }
+
+        .nextweek{
+          background-color: aquamarine;
+          opacity: .4;
+        }
+
+        .weekends{
+          background-color: gainsboro;
+        }
+
+        .holidays{
+          background-color:rgba(195, 195, 15, 0.2);
+            /* opacity: .4; */
+        }
+          .incurweek{
+          opacity: .4;
+          }
+        
+
+        .pastdays{
+          background-color: burlywood;
+          opacity: .2!important;
+        }
+
+        .registerDate{
+          background-color: aqua;
+        }
+
+.fc-event-title{
+  opacity: 1!important;
+}
+
+
+.fade-in-right {
+  opacity: 0; 
+  transform: translateX(50px);
+  animation: fadeInRight 1s forwards;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 900px;
+    margin: 0.75rem auto;
+}
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeInleft 1s forwards;
+}
+
+@keyframes fadeInleft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments :: userProfileFragment}"></div>
+    <section class="container-fluid">
+        <div class="row">
+            <!-- sidebar start -->
+            
+           <div th:replace="~{fragments :: html_sidebar}" ></div>
+          
+            <!-- sidebar end -->
+            <div class="col-12  col-lg-9  col-xl-10 vh-100 content ">
+                <!-- header start -->
+               <div th:replace="~{fragments :: html_header}"></div>
+                <!-- header end -->
+                <!-- content start -->
+                <div class="row">
+                    
+                     <!-- Modal -->
+<div class="modal fade mt-5" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-file-document-box menu-icon text-primary"></i>Announcement Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Announcement Text</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Date</label>
+              <input type="date" class="form-control" id="exampleFormControlInput1" >
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal 2-->
+  <!-- Modal -->
+<div class="modal fade mt-5" id="profileSetupModal" tabindex="-1" role="dialog" aria-labelledby="profileSetupModalLable" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="feather-user text-primary"></i>Profile Setup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                 <div class="col-5">
+                     <div class="mb-3"><img
+       src="img/user/avatar1.jpg"
+       class="img-thumbnail"
+       style="width:150px;"
+     /></div>
+                 <label for="formFileMultiple" class="form-label">Profile Upload</label>
+     <input class="form-control" type="file" id="formFileMultiple" multiple />
+                </div>
+                <div class="col-7">
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Employee ID</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Name</label>
+     <input class="form-control" type="text" id="formFileMultiple" />
+                 </div>
+                 <div class="mb-3">
+                     <label for="formFileMultiple" class="form-label">Email</label>
+     <input class="form-control" type="email" id="formFileMultiple" />
+                 </div>
+     
+                </div>
+                </div>
+                 </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+                </div>
+               
+                               
+                                <div class="row">
+                                  <div class="col-12">
+                                      <div class="card mb-4">
+                                          <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                             <h4 class="mb-0">
+                                                 <i class="feather-codepen text-primary"></i>
+                                                  Lunch Register
+                                             </h4> 
+                                             <button class="btn btn-outline-primary btn-sm full-page-btn"><i class="feather-maximize-2 h4"></i></button>  
+                                            </div> 
+                                            <hr> 
+                                            
+
+                 <div class="row">
+
+                          <!-- menu section -->
+                                  <div id="menu" class="col-12 col-md-6 col-lg-6 fade-in-left">
+                                    <h5 class="section-title ff-secondary text-start text-primary fw-normal" th:value="${registered}" th:text="${registered} ? 'Edit Registered Dates' : 'Register Us'"></h5>
+                                    <h1 class="mb-4">Next Week's Menu <i class="fa fa-utensils text-primary me-2"></i> DAT <i class="fa fa-utensils text-primary me-2"></i></h1>
+                                  
+                                    <img th:src="@{/userRole/img/myanmar-food.jpg}" alt="menu" style="width: 100%;">
+                                  </div>
+
+
+                                <div class="col-12 col-md-6 col-lg-6">
+                                
+
+                                  <!-- first row empId and Mail Noti  And Avoid meat List-->
+                                    <div class="card">
+                                        <div class=" card-header p-2">
+                                          <h3>Employee Id : <span id="registerEmpId" th:text="${userId}" ></span></h3>
+                                          </div>
+                                          
+                                      <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            
+                                          <div class="mb-3 list-group-item">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="registerEmpMail" />
+                                                <label class="form-check-label" for="registerEmpMail">Get a Email Notification for every week</label>
+                                              </div>
+
+                                            
+                                        
+                                        </ul>
+                                    
+                            
+                                  <!-- Avoid Meat list and submit Button -->
+
+                                  <div id="avoidMeatSection" class="list-group-flush">
+                                    
+                                      <p>If you want to avoid some meat. You can choose by clicking the button down below.</p> 
+                                      <div class="avoidMeatList">
+                                      </div>
+                                    
+                                      <!-- Button trigger modal -->
+                                  <div class="d-flex justify-content-center mt-4">
+                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModal">Choose Dates</button>
+                                  </div>
+
+
+                                  <!-- Modal -->
+                            
+                                                    <div id="calendarModal" class="modal fade">
+                                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div  class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title">Choose date to register ( At least 3 days )</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                              <div id="calendar"></div>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="button" class="btn btn-primary" id="sendData" ></button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                    <!-- End Modal -->
+                                  
+
+
+                                  </div>
+                                  </div>
+        </div>
+                                </div>
+
+                     
+
+                   </div>
+
+                    
+                      
+                     
+                  </div>
+                                            
+                                           
+                                          </div>
+                                      </div>
+                                  </div>
+                    </div>
+                  
+            </div>
+        </div>
+    </section>
+
+
+<div th:replace="~{fragments :: html_script}"/></div>
+</script>
+  
+
+    <!-- Template Javascript -->
+    <script th:src="@{/userRole/js/main.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type='module' th:src="@{/userRole/js/calendarjs/mainjscal.js}"></script>
+    <script>
+      var empuserId = '[[${userId}]]'
+      var empuserDoorlog = '[[${userDoorlog}]]'
+      var registerUser = '[[${registered}]]'
+      var userRole = '[[${userType}]]'
+    </script>
+
+ 
+
+</body>
+</html>
